@@ -18,7 +18,7 @@ valuation and the durability of consolidated free cash flow can be tested.
 
 The evidence base is SpaceX's Form 10-Q for the quarter ended June 30, 2026 (filed August 4,
 2026), supplemented by the June 2026 IPO prospectus, subsequent 8-Ks, the Q2 2026 earnings
-call, and external reporting. See [docs/sources.md](docs/sources.md).
+call, and external reporting. See [spacex/sources.md](spacex/sources.md).
 
 ## Visible result
 
@@ -29,17 +29,25 @@ conditions — readable without executing anything.
 
 ## Repository map
 
+Work is organised one company per folder.
+
 | Path | Contents |
 |---|---|
-| `docs/Project_1_Edition_A.md` | Edition A — the timestamped pre-AI baseline. **Never edited after the fact**; corrections are filed as dated addenda in the research-evolution document. |
-| `docs/SpaceX_2026-09-03_report.md` | Company research report: sourced financial analysis, the current call, and what would change it. |
-| `docs/sources.md` | Citation-to-use map — every source in the report traced to its original location and to where it is used. |
-| `data/SpaceX_Q2_2026_10-Q.xls` | Local copy of the Q2 2026 Form 10-Q financial workbook (EDGAR Online export). |
+| `dcf.py` | Lab 05 five-year FCFF DCF, carrying the training-case inputs and matching the twelve known answers. |
+| `spacex/Project_1_Edition_A.md` | Edition A — the timestamped pre-AI baseline. **Never edited after the fact**; corrections are filed as dated addenda in the research-evolution document. |
+| `spacex/SpaceX_2026-09-03_report.md` | Company research report: sourced financial analysis, the current call, and what would change it. |
+| `spacex/sources.md` | Citation-to-use map — every source in the report traced to its original location and to where it is used. |
+| `spacex/data/SpaceX_Q2_2026_10-Q.xls` | Local copy of the Q2 2026 Form 10-Q financial workbook (EDGAR Online export). |
+| `nvidia/NVIDIA_2026-09-10_lab06.md` | Lab 06 write-up: sourced inputs, sensitivity grid, reverse DCF, reasonableness, and the conditional call. |
+| `nvidia/dcf.py` | Lab 06 model — twelve lines, sensitivity grid, reverse DCF, and the training-case self-check, from one command. |
+| `nvidia/data/NVIDIA_2026-01-25_10-K.xls` | Local copy of the FY2026 Form 10-K financial workbook (EDGAR Online export). |
 | `requirements.txt` | Pinned dependency ranges, mirroring the course project environment. |
 | `.env.example` | Named-but-empty credential variables. No secrets are committed anywhere. |
 
-Analysis code (`dcf.py` and later modules) is added at the repository root as each lab
-produces it.
+**A note on the two companies.** Project 1 covers SPCX. Lab 06 was run on NVIDIA after the
+instructor directed the class to use a company with an established published beta — SpaceX
+listed in June 2026 and has too little trading history for one to exist. The SpaceX work is
+unchanged and remains the Project 1 record.
 
 ## Setup and run
 
@@ -48,7 +56,8 @@ produces it.
 3. Install dependencies: `pip install -r requirements.txt`
 4. Copy `.env.example` to `.env` only if a data provider key is needed. Never commit `.env`.
 
-The Week 3 DCF model uses only the Python standard library and runs with `python dcf.py`.
+The Week 3 DCF models use only the Python standard library. Run the Lab 05 training-case model
+with `python dcf.py`, and the Lab 06 NVIDIA model with `cd nvidia && python dcf.py`.
 
 ## Data sources and point-in-time boundary
 
@@ -56,6 +65,11 @@ Primary source is SpaceX's Form 10-Q for the quarter and six months ended June 3
 accession 0001628280-26-052535, filed August 4, 2026. All figures are as reported for those
 periods; nothing in this repository incorporates information published after the stated
 as-of date of each document.
+
+For the Lab 06 valuation, the primary source is NVIDIA's Form 10-K for the fiscal year ended
+January 25, 2026, filed February 25, 2026. Market data — share price, beta, and the 10-year
+Treasury yield — is as of September 10, 2026 and is labeled with its retrieval date in the
+Lab 06 write-up.
 
 ## Financial conventions
 
