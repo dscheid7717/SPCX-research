@@ -41,6 +41,8 @@ Work is organised one company per folder.
 | `nvidia/NVIDIA_2026-09-10_lab06.md` | Lab 06 write-up: sourced inputs, sensitivity grid, reverse DCF, reasonableness, and the conditional call. |
 | `nvidia/dcf.py` | Lab 06 model — twelve lines, sensitivity grid, reverse DCF, and the training-case self-check, from one command. |
 | `nvidia/data/NVIDIA_2026-01-25_10-K.xls` | Local copy of the FY2026 Form 10-K financial workbook (EDGAR Online export). |
+| `asbury/Asbury_2026-09-15_lab07.md` | Lab 07 write-up: peer policy, use/qualify decisions, implied range, and the leave-one-peer-out interpretation. |
+| `asbury/comps.py` | Lab 07 comparable-company P/E calculator for the Asbury training case. |
 | `requirements.txt` | Pinned dependency ranges, mirroring the course project environment. |
 | `.env.example` | Named-but-empty credential variables. No secrets are committed anywhere. |
 
@@ -48,6 +50,9 @@ Work is organised one company per folder.
 instructor directed the class to use a company with an established published beta — SpaceX
 listed in June 2026 and has too little trading history for one to exist. The SpaceX work is
 unchanged and remains the Project 1 record.
+
+Lab 07 uses the Asbury Automotive training case supplied by the course, kept in `asbury/`
+so it stays separate from the Project 1 company work.
 
 ## Setup and run
 
@@ -57,7 +62,8 @@ unchanged and remains the Project 1 record.
 4. Copy `.env.example` to `.env` only if a data provider key is needed. Never commit `.env`.
 
 The Week 3 DCF models use only the Python standard library. Run the Lab 05 training-case model
-with `python dcf.py`, and the Lab 06 NVIDIA model with `cd nvidia && python dcf.py`.
+with `python dcf.py`, and the Lab 06 NVIDIA model with `cd nvidia && python dcf.py`. The Lab 07
+comparables calculator is also standard library only: `cd asbury && python comps.py`.
 
 ## Data sources and point-in-time boundary
 
@@ -70,6 +76,9 @@ For the Lab 06 valuation, the primary source is NVIDIA's Form 10-K for the fisca
 January 25, 2026, filed February 25, 2026. Market data — share price, beta, and the 10-year
 Treasury yield — is as of September 10, 2026 and is labeled with its retrieval date in the
 Lab 06 write-up.
+
+Lab 07 uses the course's frozen Asbury case inputs: December 31, 2024 closing prices paired
+with FY2024 total GAAP diluted EPS. No data is fetched at run time.
 
 ## Financial conventions
 
