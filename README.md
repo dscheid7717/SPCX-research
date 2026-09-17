@@ -41,12 +41,14 @@ Work is organised one company per folder.
 | `nvidia/NVIDIA_2026-09-10_lab06.md` | Lab 06 write-up: sourced inputs, sensitivity grid, reverse DCF, reasonableness, and the conditional call. |
 | `nvidia/dcf.py` | Lab 06 model — twelve lines, sensitivity grid, reverse DCF, and the training-case self-check, from one command. |
 | `nvidia/data/NVIDIA_2026-01-25_10-K.xls` | Local copy of the FY2026 Form 10-K financial workbook (EDGAR Online export). |
+| `nvidia/NVIDIA_2026-09-17_lab08.md` | Lab 08 write-up: peer policy, two sourced candidate decisions, checked comparison, DCF triangulation, and the revised conditional call. |
+| `nvidia/comps.py` | Lab 08 NVIDIA comparables calculator. Imports its analysis layer from `asbury/comps.py`, adding a share-basis check and an earnings-basis sensitivity. |
 | `asbury/Asbury_2026-09-15_lab07.md` | Lab 07 write-up: peer policy, use/qualify decisions, implied range, and the leave-one-peer-out interpretation. |
 | `asbury/comps.py` | Lab 07 comparable-company P/E calculator for the Asbury training case. |
 | `requirements.txt` | Pinned dependency ranges, mirroring the course project environment. |
 | `.env.example` | Named-but-empty credential variables. No secrets are committed anywhere. |
 
-**A note on the two companies.** Project 1 covers SPCX. Lab 06 was run on NVIDIA after the
+**A note on the two companies.** Project 1 covers SPCX. Labs 06 and 08 were run on NVIDIA after the
 instructor directed the class to use a company with an established published beta — SpaceX
 listed in June 2026 and has too little trading history for one to exist. The SpaceX work is
 unchanged and remains the Project 1 record.
@@ -63,7 +65,10 @@ so it stays separate from the Project 1 company work.
 
 The Week 3 DCF models use only the Python standard library. Run the Lab 05 training-case model
 with `python dcf.py`, and the Lab 06 NVIDIA model with `cd nvidia && python dcf.py`. The Lab 07
-comparables calculator is also standard library only: `cd asbury && python comps.py`.
+comparables calculators are also standard library only: `cd asbury && python comps.py` for
+the Lab 07 training case, and `cd nvidia && python comps.py` for the Lab 08 NVIDIA comparison.
+The NVIDIA calculator imports the Lab 07 analysis functions, so the arithmetic it runs is the
+version already checked against the course's published answers.
 
 ## Data sources and point-in-time boundary
 
@@ -79,6 +84,12 @@ Lab 06 write-up.
 
 Lab 07 uses the course's frozen Asbury case inputs: December 31, 2024 closing prices paired
 with FY2024 total GAAP diluted EPS. No data is fetched at run time.
+
+Lab 08 compares NVIDIA against AMD and Broadcom at September 10, 2026 closing prices — the same
+trading date and price source as the Lab 06 DCF — paired with each company's latest total GAAP
+diluted EPS from an annual report published before that date. Peer earnings are traced to the
+SEC XBRL `EarningsPerShareDiluted` filing tag with period, form type and accession number. Inputs
+are frozen in the file; nothing is fetched at run time.
 
 ## Financial conventions
 
