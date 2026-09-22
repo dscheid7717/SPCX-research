@@ -10,9 +10,12 @@ Course materials: https://github.com/CinderZhang/FIN43900-Fall2026
 
 - **Brightspace is authoritative** for all dates, points, and submissions. The course repo is
   content only. If the two disagree, Brightspace governs.
+- **My company is NVIDIA (NVDA), as of 2026-09-22.** All coursework going forward — labs,
+  pro-forma builds, valuation, and Project 1 — is NVIDIA work. Earlier SPCX (Space Exploration
+  Technologies Corp.) material in `spacex/` is a closed historical record: read it for
+  continuity, never extend it, never edit it.
 - **Project 1** — I am the equity research analyst; the decision is initiate / watch-defer /
-  do not initiate **SPCX (Space Exploration Technologies Corp.)** for an investment committee
-  with no current position.
+  do not initiate **NVIDIA (NVDA)** for an investment committee with no current position.
 - Weekly lab checkouts are usually submitted as GitHub links to files in this repo.
 
 ## Academic-integrity rules that constrain you
@@ -20,9 +23,15 @@ Course materials: https://github.com/CinderZhang/FIN43900-Fall2026
 These come from `PROJECT-SUBMISSION-ARCHITECTURE.md` and the AI Boundary Card. They are not
 negotiable.
 
-- **Never modify `docs/Project_1_Edition_A.md`.** It is the timestamped pre-AI baseline of
+- **Never modify `spacex/Project_1_Edition_A.md`.** It is the timestamped pre-AI baseline of
   record. Corrections are filed as a dated addendum *after* the unchanged Edition A, inside the
-  research-evolution document — never as an edit to Edition A itself.
+  research-evolution document — never as an edit to Edition A itself. This holds even though the
+  Project 1 company is now NVIDIA: the SPCX Edition A stays on disk, untouched, as the artifact
+  it was on its timestamp.
+- **Never draft an Edition A.** Edition A is my own pre-AI baseline, human-authored by
+  definition. If the NVIDIA company switch requires a new Edition A, I write it myself, before
+  any AI involvement, and I confirm the requirement with the instructor first. Do not offer to
+  draft one, outline one, or suggest wording for one.
 - **Disclose your role.** Anything drafted with AI assistance carries the course report footer
   (learning-exercise disclaimer, named AI tools, "errors are my own").
 - **I must be able to explain every line on camera.** Video 2 is a 5-minute codebase
@@ -90,7 +99,7 @@ work that connects technical analysis to clear business decisions.
 
 ## File naming
 
-- One company, one folder. Dated, descriptive names — `SpaceX_2026-09-03_report.md`.
+- One company, one folder. Dated, descriptive names — `NVIDIA_2026-09-22_lab09.md`.
 - No `final_v2_REAL.md`, no `Untitled(3).md`, no duplicate copies of the same document.
 
 ## Deliverables

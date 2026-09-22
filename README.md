@@ -1,24 +1,35 @@
-# SPCX Research — FIN 43900 Project 1
+# FIN 43900 Project 1 — Equity Research
 
-Equity research on **Space Exploration Technologies Corp. (SPCX)** for FIN 43900, AI in
-Finance, Purdue University, Fall 2026. Author: Drew Scheiderer.
+Equity research on **NVIDIA Corporation (NVDA)** for FIN 43900, AI in Finance, Purdue
+University, Fall 2026. Author: Drew Scheiderer.
+
+> **Company switch, 2026-09-22.** This repository began as SPCX (Space Exploration
+> Technologies Corp.) research and is still named `SPCX-research` so that lab links already
+> submitted on Brightspace keep resolving. The company for all work from 2026-09-22 forward is
+> NVIDIA. The SPCX material in `spacex/` is left exactly as it stood and is not extended.
 
 > This repository is coursework for a learning exercise. It is not investment research and it
 > is not financial advice.
 
 ## Finance decision and intended user
 
-**Decision:** initiate, watch-defer, or do not initiate a position in SPCX.
+**Decision:** initiate, watch-defer, or do not initiate a position in NVDA.
 
 **Intended user:** a buy-side investment committee with no current position, which needs a
 risk-aware recommendation and a focused diligence plan before committing capital.
 
-**As-of date:** September 3, 2026. **Current call: WATCH–DEFER** — do not initiate until
-valuation and the durability of consolidated free cash flow can be tested.
+**As-of date:** September 17, 2026. **Current call: WATCH–DEFER**, carried from the Lab 08
+triangulation — revised up from Lab 06's *do not initiate* on a valuation-conviction change, not
+a business-quality one. The reasoning and the conditions that would flip it are in
+[nvidia/NVIDIA_2026-09-17_lab08.md](nvidia/NVIDIA_2026-09-17_lab08.md).
 
-The evidence base is SpaceX's Form 10-Q for the quarter ended June 30, 2026 (filed August 4,
-2026), supplemented by the June 2026 IPO prospectus, subsequent 8-Ks, the Q2 2026 earnings
-call, and external reporting. See [spacex/sources.md](spacex/sources.md).
+The evidence base is NVIDIA's Form 10-K for the fiscal year ended January 25, 2026, with market
+data as of September 10, 2026 and peer earnings traced to SEC XBRL filing tags. Sources and
+as-of dates are carried in the Lab 06 and Lab 08 write-ups.
+
+The superseded SPCX call — WATCH–DEFER as of September 3, 2026, on the Q2 2026 Form 10-Q — is
+preserved in [spacex/SpaceX_2026-09-03_report.md](spacex/SpaceX_2026-09-03_report.md) and
+[spacex/sources.md](spacex/sources.md). It is history, not the current position.
 
 ## Visible result
 
@@ -48,10 +59,12 @@ Work is organised one company per folder.
 | `requirements.txt` | Pinned dependency ranges, mirroring the course project environment. |
 | `.env.example` | Named-but-empty credential variables. No secrets are committed anywhere. |
 
-**A note on the two companies.** Project 1 covers SPCX. Labs 06 and 08 were run on NVIDIA after the
-instructor directed the class to use a company with an established published beta — SpaceX
-listed in June 2026 and has too little trading history for one to exist. The SpaceX work is
-unchanged and remains the Project 1 record.
+**A note on the company history.** Labs 06 and 08 were run on NVIDIA after the instructor
+directed the class to use a company with an established published beta — SpaceX listed in June
+2026 and has too little trading history for one to exist. As of 2026-09-22 NVIDIA is the company
+for all work, Project 1 included, so the two-company split is closed. The SPCX files in
+`spacex/` are unchanged and remain the record of that earlier work; `spacex/Project_1_Edition_A.md`
+in particular is a timestamped pre-AI baseline and is never edited.
 
 Lab 07 uses the Asbury Automotive training case supplied by the course, kept in `asbury/`
 so it stays separate from the Project 1 company work.
@@ -72,12 +85,14 @@ version already checked against the course's published answers.
 
 ## Data sources and point-in-time boundary
 
-Primary source is SpaceX's Form 10-Q for the quarter and six months ended June 30, 2026, SEC
-accession 0001628280-26-052535, filed August 4, 2026. All figures are as reported for those
-periods; nothing in this repository incorporates information published after the stated
-as-of date of each document.
+Nothing in this repository incorporates information published after the stated as-of date of
+each document.
 
-For the Lab 06 valuation, the primary source is NVIDIA's Form 10-K for the fiscal year ended
+The superseded SPCX work draws on SpaceX's Form 10-Q for the quarter and six months ended
+June 30, 2026, SEC accession 0001628280-26-052535, filed August 4, 2026, as reported for those
+periods.
+
+For the NVIDIA valuation, the primary source is NVIDIA's Form 10-K for the fiscal year ended
 January 25, 2026, filed February 25, 2026. Market data — share price, beta, and the 10-year
 Treasury yield — is as of September 10, 2026 and is labeled with its retrieval date in the
 Lab 06 write-up.
