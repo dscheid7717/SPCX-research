@@ -56,6 +56,13 @@ Work is organised one company per folder.
 | `nvidia/comps.py` | Lab 08 NVIDIA comparables calculator. Imports its analysis layer from `asbury/comps.py`, adding a share-basis check and an earnings-basis sensitivity. |
 | `asbury/Asbury_2026-09-15_lab07.md` | Lab 07 write-up: peer policy, use/qualify decisions, implied range, and the leave-one-peer-out interpretation. |
 | `asbury/comps.py` | Lab 07 comparable-company P/E calculator for the Asbury training case. |
+| `proforma.py` | Lab 09 five-year three-statement pro-forma engine, carrying the Asbury training case and matching its published $291.75. |
+| `asbury/Asbury_2026-09-22_lab09.md` | Lab 09 write-up: assumption set, the engine, the known-answer validation, and the judgment sensitivity. |
+| `asbury/sensitivity.py` | Lab 09 judgment sensitivity over the pro-forma assumptions. |
+| `nvidia/beta.py` | Lab 09 equity beta estimated from price history under five specifications; supplies the 16.03% cost of equity. |
+| `nvidia/data/NVIDIA_2026-09-22_beta_prices.csv` | Cached adjusted closes for NVDA and the S&P 500, so the beta estimate is reproducible offline. |
+| `nvidia/NVIDIA_2026-09-24_lab10.md` | Lab 10 write-up: three years of sourced history, the labelled assumption set, the named company-specific line, the checks, and the market comparison. |
+| `nvidia/proforma.py` | Lab 10 NVIDIA pro-forma — a sibling of the root engine, with R&D, interest income, stock compensation and the supply-obligation line. |
 | `requirements.txt` | Pinned dependency ranges, mirroring the course project environment. |
 | `.env.example` | Named-but-empty credential variables. No secrets are committed anywhere. |
 
@@ -80,6 +87,12 @@ The Week 3 DCF models use only the Python standard library. Run the Lab 05 train
 with `python dcf.py`, and the Lab 06 NVIDIA model with `cd nvidia && python dcf.py`. The Lab 07
 comparables calculators are also standard library only: `cd asbury && python comps.py` for
 the Lab 07 training case, and `cd nvidia && python comps.py` for the Lab 08 NVIDIA comparison.
+
+The pro-forma models are standard library only as well: `python proforma.py` from the root runs
+the Lab 09 Asbury training case and must still print $291.75, and `cd nvidia && python proforma.py`
+runs the Lab 10 NVIDIA build. `cd nvidia && python proforma.py --prove-refusal` demonstrates that
+the model stops rather than valuing an unbalanced sheet. The Lab 09 beta estimate runs with
+`cd nvidia && python beta.py`; it reads the cached price file and needs no network.
 The NVIDIA calculator imports the Lab 07 analysis functions, so the arithmetic it runs is the
 version already checked against the course's published answers.
 
