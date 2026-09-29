@@ -9,18 +9,26 @@
 | FY2031E free cash flow to equity (FCFE) | 222,922 USD m |
 | Value per share | $58.23 |
 
-> **Status: NOT YET WRITTEN — human-authored, pre-run.**
+> **Status: locked, then reconciled.** Lab 11 requires that *"before running a change, close AI
+> and save one prediction with a timestamp or Git commit: input old → new with units, expected
+> output direction and rough size, and why."*
 >
-> Lab 11: *"Before running a change, close AI and save one prediction with a timestamp or
-> Git commit: input old → new with units, expected output direction and rough size, and
-> why."*
+> **Audit trail, verifiable in `git log`:**
 >
-> Claude built the sensitivity rig and verified it against itself, but has **not** run either
-> driver and has not chosen the drivers or the ranges. The lab's own instruction to the AI is
-> *"Do not generate company data, choose new ranges, or write my interpretation for me."*
+> | Commit | What it contains |
+> |---|---|
+> | `dbf76fd` | the prediction, committed **before** any sensitivity run had been executed |
+> | `86a8a9f` | the results, the reconciliation below, and the Lab 11 write-up |
 >
-> **Commit this file before the first sensitivity run.** The commit timestamp is the evidence
-> that the prediction preceded the result.
+> **Post-run edits to this file, declared.** After the run I filled the two per-driver
+> "predicted direction and rough size" tables, which were left as empty template scaffolding in
+> `dbf76fd`, and replaced this status block, which still read as a to-do. **Neither edit changed
+> the prediction.** The quantified forecast — 1–4% of value per percentage point of revenue
+> growth against 1% or less per percentage point of gross margin, and revenue growth ranked
+> larger — was already written in the "Which driver I expect to be larger" section of `dbf76fd`,
+> and `git diff dbf76fd HEAD -- nvidia/NVIDIA_2026-09-29_lab11_locked_prediction.md` shows it
+> unchanged. The tables now restate that forecast and mark plainly that operating profit and
+> FCFE were **not** sized in advance — only value per share was.
 
 ---
 
@@ -49,9 +57,9 @@ Gordon fade is not a discontinuity.
 
 | Output | Direction | Rough size | Why |
 |---|---|---|---|
-| FY2031E operating profit | | _to fill_ | |
-| FY2031E FCFE | | _to fill_ | |
-| Value per share | | _to fill_ | |
+| FY2031E operating profit | same direction as the input | *not predicted* | I sized only value per share |
+| FY2031E FCFE | same direction as the input | *not predicted* | I sized only value per share |
+| Value per share | same direction as the input | **1–4% of value per percentage point of growth** | revenue growth drives the company in the normal way revenue growth does, and it compounds across all five years |
 
 ---
 
@@ -87,9 +95,9 @@ scale.
 
 | Output | Direction | Rough size | Why |
 |---|---|---|---|
-| FY2031E operating profit | | _to fill_ | |
-| FY2031E FCFE | | _to fill_ | |
-| Value per share | | _to fill_ | |
+| FY2031E operating profit | same direction as the input | *not predicted* | I sized only value per share |
+| FY2031E FCFE | same direction as the input | *not predicted* | I sized only value per share |
+| Value per share | same direction as the input | **around 1% or less of value per percentage point of margin** | margin moves value, but to a smaller magnitude than revenue growth |
 
 ---
 

@@ -63,6 +63,10 @@ Work is organised one company per folder.
 | `nvidia/data/NVIDIA_2026-09-22_beta_prices.csv` | Cached adjusted closes for NVDA and the S&P 500, so the beta estimate is reproducible offline. |
 | `nvidia/NVIDIA_2026-09-24_lab10.md` | Lab 10 write-up: three years of sourced history, the labelled assumption set, the named company-specific line, the checks, and the market comparison. |
 | `nvidia/proforma.py` | Lab 10 NVIDIA pro-forma — a sibling of the root engine, with R&D, interest income, stock compensation and the supply-obligation line. |
+| `nvidia/NVIDIA_2026-09-29_lab11.md` | Lab 11 write-up: two operating drivers, the locked prediction and its reconciliation, the driver ranking, and the partner exchanges. |
+| `nvidia/sensitivity.py` | Lab 11 one-at-a-time sensitivity rig. Snapshots all 24 independent inputs and restores them before every run; `--selftest` proves the rig, `--trace` prints statements for one run. |
+| `nvidia/NVIDIA_2026-09-29_lab11_locked_prediction.md` | Locked Changed-Input Record — the human-authored prediction, committed before the first sensitivity run. |
+| `nvidia/output/` | Frozen visible output for Lab 11: the base run and the sensitivity run, readable without executing anything. |
 | `requirements.txt` | Pinned dependency ranges, mirroring the course project environment. |
 | `.env.example` | Named-but-empty credential variables. No secrets are committed anywhere. |
 

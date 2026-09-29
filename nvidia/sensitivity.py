@@ -68,12 +68,18 @@ def restore_base():
 
 
 # ---------------------------------------------------------------------------
-# THE DRIVERS -- Drew fills this in. See the Lab 11 write-up.
+# THE DRIVERS -- my choice, not the AI's. See the Lab 11 write-up.
 # ---------------------------------------------------------------------------
 # The lab is explicit that the choice of drivers and the width of their ranges are
-# mine, not the AI's: "Do not generate company data, choose new ranges, or write my
-# interpretation for me." So this block is deliberately left unset, and the script
-# refuses to run until it is filled.
+# mine: "Do not generate company data, choose new ranges, or write my interpretation
+# for me." So this block shipped UNSET, and the script refused to run until I filled
+# it -- run it with the drivers blanked and it still prints the available inputs and
+# exits 2 rather than guessing. The values below are the ones I chose, and both
+# ranges are derived from NVIDIA's own history in the write-up.
+#
+# Both drivers move a uniform +/-2 percentage points on all five forecast years.
+# Equal shifts are deliberate: they make the two spans comparable, so the ranking
+# is a fact about the model rather than about which range I made wider.
 #
 # Rules the validator below enforces, because they are the ones a partner is asked
 # to check:
