@@ -178,13 +178,50 @@ fixed. Revenue is the only input here that feeds itself year to year.
 
 ## Reconciliation — filled in AFTER the run, not before
 
-**Actual results:**
+Run at commit `dbf76fd`+1; full output in
+[`output/NVIDIA_2026-09-29_lab11_sensitivity.txt`](output/NVIDIA_2026-09-29_lab11_sensitivity.txt).
 
-**Where the prediction was wrong, and what explains the error:**
+**Actual results.** Base value per share $58.23.
 
-**Does this change my valuation conclusion or research priority?** (A reasoned "no change"
-is a valid answer and is explicitly allowed.)
+| Driver | Value: lower / base / higher | Span | Per pp of input |
+|---|---|---:|---:|
+| Revenue growth | 54.51 / 58.23 / 62.17 | **7.66** | 3.29% of base |
+| Gross margin | 56.12 / 58.23 / 60.33 | **4.21** | 1.81% of base |
+
+| Claim | Predicted | Actual | Verdict |
+|---|---|---|---|
+| Ranking | growth span > margin span | 7.66 vs 4.21 | correct |
+| Sign | both move with the input | both, all three outputs | correct |
+| Revenue growth size | 1-4% of value per pp | 3.29% per pp | correct |
+| Gross margin size | 1% or less per pp | 1.81% per pp | **wrong, ~1.8x my ceiling** |
+| Span ratio | roughly 1x to 4x | 1.8x | correct |
+
+**Where the prediction was wrong, and what explains the error.** Four of five right. I
+understated gross margin by about 80%, for two reasons I had not traced before running.
+
+1. A percentage point of margin is a percentage point of REVENUE, and FY2031 revenue is
+   471,842. So 2pp is 9,437 of gross profit before any offset, against base operating profit of
+   255,618. I was sizing margin against margin, when the base that matters is revenue.
+2. The terminal value is 59.0% of this valuation and capitalises final-year FCFE, so anything
+   that moves the final year moves most of the answer. That amplifies both drivers and I had
+   carried it into neither estimate.
+
+I also gave a reason that could not have worked. Strategic capital committed to and by NVIDIA
+is excluded from this model by construction, as the pre-run note above says. The ranking was
+right; one of my two stated reasons for it was not a mechanism the model contains.
+
+**Does this change my valuation conclusion or research priority?**
+
+**Conclusion: no change, and the no-change reason is the finding.** Both operating drivers
+together move value across $54.51-$62.17. The market is at $224.58 and Lab 10's beta grid ran
+$48-$74. No operating assumption I can defend from NVIDIA's own history closes a $166 gap, so
+the disagreement with the market is not about operations. The call stays WATCH-DEFER.
+
+**Research priority: changed.** Between the two, revenue growth earns the diligence at 1.8x the
+leverage. But both are second-order next to the discount rate, which this lab did not test
+because it is a valuation input rather than an operating driver.
 
 ---
 
-*Prediction written by Drew Scheiderer with no AI assistance, before any sensitivity run.*
+*Prediction written by Drew Scheiderer with no AI assistance, before any sensitivity run.
+Reconciliation added after the run, against the committed prediction.*

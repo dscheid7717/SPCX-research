@@ -1,0 +1,96 @@
+==========================================================================
+FIVE-YEAR PRO-FORMA -- NVIDIA Corporation (NVDA)
+==========================================================================
+
+OPENING BALANCE SHEET (FY2026 actual, 10-K period end Jan 25, 2026)
+--------------------------------------------------------------------------
+Assets, mapped into the engine                     206,803.0
+Assets, as filed                                   206,803.0
+Liabilities, mapped into the engine                 49,510.0
+Liabilities, as filed                               49,510.0
+Assets - liabilities - equity                            0.0
+
+INCOME STATEMENT (USD millions)
+----------------------------------------------------------------------------------------------------
+                                     FY2027E       FY2028E       FY2029E       FY2030E       FY2031E
+Revenue                              280,719       342,478       397,274       440,974       471,842
+Gross profit                         199,311       241,447       278,092       306,477       325,571
+Research and development              23,861        30,823        37,741        44,097        49,543
+SG&A                                   5,979         7,243         8,343         9,194         9,767
+Depreciation and amortization          4,698         6,126         7,690         9,240        10,642
+Operating income                     164,772       197,254       224,318       243,945       255,618
+Interest income                        2,721         2,721         2,721         2,721         2,721
+Interest expense                         259           229           198           167           137
+Pretax income                        167,234       199,746       226,840       246,498       258,202
+Tax                                   26,757        31,959        36,294        39,440        41,312
+Net income                           140,476       167,787       190,546       207,059       216,890
+
+BALANCE SHEET (USD millions)
+----------------------------------------------------------------------------------------------------
+                                     FY2027E       FY2028E       FY2029E       FY2030E       FY2031E
+Cash and securities                   62,556        62,556        62,556        62,556        62,556
+Inventory                             27,889        34,612        40,830        46,077        50,110
+PP&E, net                             13,539        16,996        20,421        23,519        26,079
+Other assets                         114,233       115,922       117,421       118,616       119,461
+Total assets                         218,218       230,085       241,228       250,768       258,206
+
+Supply obligations                     3,569         4,429         5,225         5,897         6,413
+Revolver                                   0             0             0             0             0
+Debt                                   7,468         6,468         5,468         4,468         3,468
+Other liabilities                     38,303        38,303        38,303        38,303        38,303
+Total liabilities                     49,340        49,200        48,996        48,668        48,184
+Shareholders' equity                 168,878       180,885       192,232       202,101       210,022
+
+CASH FLOW TO EQUITY (USD millions)
+----------------------------------------------------------------------------------------------------
+                                     FY2027E       FY2028E       FY2029E       FY2030E       FY2031E
+Net income                           140,476       167,787       190,546       207,059       216,890
+Depreciation and amortization          4,698         6,126         7,690         9,240        10,642
+Stock-based compensation               8,302        10,128        11,749        13,041        13,954
+Capital spending                       7,855         9,583        11,116        12,339        13,202
+Change in inventory                    6,486         6,722         6,218         5,247         4,034
+Change in other WC                     1,772         1,689         1,499         1,195           844
+Change in supply obligations             830           860           796           671           516
+Debt repayment                         1,000         1,000         1,000         1,000         1,000
+Free cash flow to equity             137,193       165,907       190,948       210,231       222,922
+
+Share buyback                         40,000        40,000        40,000        40,000        40,000
+Dividends                              1,000         1,000         1,000         1,000         1,000
+Surplus distribution                  96,193       124,907       149,948       169,231       181,922
+Total returned to holders            137,193       165,907       190,948       210,231       222,922
+Cash, year end                        62,556        62,556        62,556        62,556        62,556
+
+CHECKS
+--------------------------------------------------------------------------
+Year            Assets - liab - equity              Cash     Above min
+FY2027E                            0.0          62,556.0           yes
+FY2028E                            0.0          62,556.0           yes
+FY2029E                            0.0          62,556.0           yes
+FY2030E                            0.0          62,556.0           yes
+FY2031E                            0.0          62,556.0           yes
+
+All checks passed -- statements are internally consistent.
+
+EQUITY VALUATION (FCFE discounted at the cost of equity)
+--------------------------------------------------------------------------
+Cost of equity                                       16.03%
+Terminal growth                                       3.00%
+PV of five years of FCFE                             585,697
+Terminal value at FY2031                           1,770,068
+PV of terminal value                                 841,664
+Equity value                                       1,427,361
+Share of value after FY2031                           59.0%
+Diluted shares (millions)                             24,514
+Value per share                                        58.23
+
+THE MODEL AGAINST THE MARKET
+--------------------------------------------------------------------------
+  At a 16.03% cost of equity (beta 2.216, my own estimate), this model says 58.23.
+  At 14.02% (Blume-adjusted beta 1.815), it says 69.46.
+  The market says 224.58 on September 24, 2026, on the same 24,514 million diluted shares.
+
+  The range 58.23 to 69.46 comes from one input -- beta -- and
+  nothing else. The question that leaves me is not whether NVIDIA is cheap.
+  It is which of us is wrong about the discount rate: the market is pricing
+  NVIDIA as though its cost of equity were far below what its own five-year
+  return history implies. No recommendation is drawn here.

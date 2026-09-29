@@ -1,0 +1,83 @@
+================================================================================================
+ONE-AT-A-TIME SENSITIVITY -- NVIDIA Corporation (NVDA)
+================================================================================================
+Every run restores all 24 independent inputs from a snapshot, then changes
+exactly one. Linked statement quantities recalculate; none are overridden.
+
+Base                                        FY2031E operating prof (USD m)FY2031E free cash flow (USD m)       Value per share (USD)
+------------------------------------------------------------------------------------------------
+base                        (model as filed)                  255,618.43                  222,922.22                       58.23
+
+DRIVER: Revenue growth
+------------------------------------------------------------------------------------------------
+  Input          REVENUE_GROWTH
+  Units          percentage points of annual growth, decimal form (+/-0.02 each year)
+  Years affected all five, FY2027E-FY2031E
+  Reason         uniform shift, the same mechanism my Lab 06 reverse DCF applies to this same path; +/-2pp matched to the gross margin range so the spans compare
+
+Run                              Input valueFY2031E operating prof (USD m)FY2031E free cash flow (USD m)       Value per share (USD)
+------------------------------------------------------------------------------------------------
+lower          [0.28, 0.2, 0.14, 0.09, 0.05]                  234,108.47                  205,517.83                       54.51
+base           [0.3, 0.22, 0.16, 0.11, 0.07]                  255,618.43                  222,922.22                       58.23
+higher        [0.32, 0.24, 0.18, 0.13, 0.09]                  278,668.44                  241,491.94                       62.17
+
+  Change from base                FY2031E operating prof      FY2031E free cash flow             Value per share
+  lower                                       -21,509.96                  -17,404.39                       -3.72
+  higher                                      +23,050.01                  +18,569.73                       +3.94
+
+  Output span (max - min)                      44,559.97                   35,974.12                        7.66
+
+DRIVER: Gross margin
+------------------------------------------------------------------------------------------------
+  Input          GROSS_MARGIN
+  Units          percentage points of revenue, decimal form (+/-0.02 each year)
+  Years affected all five, FY2027E-FY2031E
+  Reason         observed three-year swing was 3.9pp peak to trough (74.99% FY2025 vs 71.07% FY2026), so +/-2pp brackets the width the company actually delivered
+
+Run                              Input valueFY2031E operating prof (USD m)FY2031E free cash flow (USD m)       Value per share (USD)
+------------------------------------------------------------------------------------------------
+lower       [0.69, 0.685, 0.68, 0.675, 0.67]                  246,464.69                  215,048.64                       56.12
+base         [0.71, 0.705, 0.7, 0.695, 0.69]                  255,618.43                  222,922.22                       58.23
+higher      [0.73, 0.725, 0.72, 0.715, 0.71]                  264,772.17                  230,795.79                       60.33
+
+  Change from base                FY2031E operating prof      FY2031E free cash flow             Value per share
+  lower                                        -9,153.74                   -7,873.58                       -2.11
+  higher                                       +9,153.74                   +7,873.58                       +2.11
+
+  Output span (max - min)                      18,307.49                   15,747.16                        4.21
+
+
+ACCOUNTING CHECKS
+================================================================================================
+Base, before the analysis           worst |assets-liab-equity|       0.00     lowest cash     62,556.0
+  Revenue growth lower              worst |assets-liab-equity|       0.00     lowest cash     62,556.0
+  Revenue growth base               worst |assets-liab-equity|       0.00     lowest cash     62,556.0
+  Revenue growth higher             worst |assets-liab-equity|       0.00     lowest cash     62,556.0
+  Gross margin lower                worst |assets-liab-equity|       0.00     lowest cash     62,556.0
+  Gross margin base                 worst |assets-liab-equity|       0.00     lowest cash     62,556.0
+  Gross margin higher               worst |assets-liab-equity|       0.00     lowest cash     62,556.0
+Base, restored and rerun            worst |assets-liab-equity|       0.00     lowest cash     62,556.0
+
+RESTORED-BASE CHECK
+------------------------------------------------------------------------------------------------
+FY2031E operating profit (USD m)                               +0.000000   OK
+FY2031E free cash flow to equity (FCFE) (USD m)                +0.000000   OK
+Value per share (USD)                                          +0.000000   OK
+
+Base restored exactly. The spans above are comparable to one another.
+
+
+WHICH DRIVER IS LARGER, OVER THESE RANGES
+================================================================================================
+Output                                                  Revenue growth              Gross margin
+------------------------------------------------------------------------------------------------
+FY2031E operating profit span (USD m)                        44,559.97                 18,307.49
+FY2031E free cash flow to equity (FCFE) span (USD m)                 35,974.12                 15,747.16
+Value per share span (USD)                                        7.66                      4.21
+
+Larger driver for value per share, OVER THESE RANGES: Revenue growth
+Its span is 1.8x the other's.
+
+'Over these ranges' is not a throwaway. A bigger span can reflect a wider
+input range rather than a more important input. Narrow one range and the
+ranking can flip without anything about NVIDIA changing.
