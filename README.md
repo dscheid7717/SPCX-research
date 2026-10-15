@@ -29,7 +29,8 @@ transaction multiples are not used because no defensible control comparable exis
 **Committee action: WATCH/DEFER.** FCFF DCF range **$49–$115 per share, base $79**, against a
 $221.30 price. The name stays on watch, not rejected, because NVIDIA trades below both admitted
 peers on trailing EV/EBITDA (40.3× vs 50.7× and 138.3×) while its earnings keep growing in the
-base case. In the AI-capex-digestion case the same rule gives **DO NOT INITIATE**.
+base case. In the AI-capex-digestion case, and whenever gross margin breaks 67%, the same rule
+gives **DO NOT INITIATE**.
 
 Readable without running anything:
 
@@ -156,8 +157,9 @@ See `docs/validation-and-ai-use.md` for the full register. In brief:
 
 **Reversal triggers:**
 - **INITIATE** if the price is at or below the base-case value.
-- **DO NOT INITIATE** if a 10-Q shows a year-over-year revenue decline, or if NVIDIA's
-  EV/EBITDA reaches the lowest admitted peer's.
+- **DO NOT INITIATE** if a 10-Q shows a year-over-year revenue decline, gross margin below
+  67%, or NVIDIA's EV/EBITDA at or above the lowest admitted peer's.
+- **Escalate and rerun** if excess purchase obligations exceed 12.8% of inventory.
 - Review at each 10-Q.
 
 ---

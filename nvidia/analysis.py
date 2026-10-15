@@ -179,8 +179,9 @@ DRIVER_RECORD = [
         "challenge": "FY2026 reported 71.07% was depressed by a 4,000 inventory write-down; "
                      "normalised it is 72.92%. Starting from the reported figure would have "
                      "carried a one-time charge into every forecast year.",
-        "would_change_it": "Two consecutive quarters below 70% (competitive entry faster "
-                           "than assumed) or above 75% (pricing power holding).",
+        "would_change_it": "A reported quarter below 67% -- my Lab 11/12 floor and do-not-"
+                           "initiate trigger, enforced by the decision rule -- or above 75% "
+                           "(pricing power holding).",
         "challenger": "own analysis (contamination catalog)",
     },
     {
@@ -229,7 +230,8 @@ DRIVER_RECORD = [
                  "commits to foundry capacity before it knows demand.",
         "challenge": "Small in value terms; it is a monitoring signal more than a value "
                      "driver.",
-        "would_change_it": "The ratio rising above 15% in a 10-Q -- the first sign of "
+        "would_change_it": "The ratio rising above 12.8% in a 10-Q (Lab 12 trigger) -- the "
+                           "first sign of "
                            "over-ordering.",
         "challenger": "own analysis (Lab 10)",
     },
@@ -407,8 +409,15 @@ PEER_FISCAL_WINDOW_DAYS = 120
 #   INITIATE         price <= the scenario's DCF value per share
 #   WATCH/DEFER      price above it, BUT relative value supports waiting: NVDA's trailing
 #                    EV/EBITDA is below EVERY admitted peer's AND the scenario's EBITDA never
-#                    falls year over year
+#                    falls year over year AND gross margin never breaks the 67% floor
 #   DO NOT INITIATE  otherwise
+# The 67% floor is my Lab 11/12 judgment, unchanged: the lower bound of my Lab 11 gross-margin
+# range, named in Lab 12 as the do-not-initiate trigger ("competitive entry I assumed was
+# gradual"). It is now enforced by the rule instead of only listed as a trigger.
+# Initiate threshold, changed from Lab 06/08: there I set "initiate below $114", the 0.5x edge
+# of the course's 0.5x-2.0x reasonableness band. That band tests whether a model is sane
+# against the market; it is not a margin of safety -- buying at $114 meant paying twice my own
+# value. Project 1 initiates only at or below the DCF value itself.
 # Why the earnings-persistence leg: a low trailing multiple only means "cheap" if the earnings
 # it is measured on persist. In a scenario where EBITDA falls, the trailing multiple overstates
 # the discount and stops being evidence for waiting.
@@ -416,6 +425,7 @@ PEER_FISCAL_WINDOW_DAYS = 120
 # below the peer MEDIAN, with no persistence leg. Its first run showed no downside case could
 # ever alter the action, which fails the project's requirement that one could -- so the rule
 # was revised after that run, and the revision is disclosed in docs/validation-and-ai-use.md.
+GROSS_MARGIN_FLOOR = 0.67     # Lab 11 lower bound / Lab 12 trigger
 GRID_WACC_STEPS = [-0.02, -0.01, 0.0, 0.01, 0.02]
 GRID_TERMINAL_GROWTH = [0.020, 0.025, 0.030, 0.035, 0.040]
 TOLERANCE = 0.05      # USD millions, for every accounting check
@@ -831,14 +841,23 @@ def ebitda_persists(run):
     return all(b >= a for a, b in zip(path, path[1:]))
 
 
-def decide(price, value, nvda_below_every_peer, earnings_persist):
+def margin_holds(inputs):
+    """True if the scenario's gross margin never falls below the 67% floor."""
+    return min(inputs["gross_margin"]) >= GROSS_MARGIN_FLOOR - 1e-12
+
+
+def decide(price, value, nvda_below_every_peer, earnings_persist, margin_ok=True):
     """Apply the written decision rule to one scenario. Returns (action, reason)."""
     if price <= value:
         return "INITIATE", f"price ${price:,.2f} at or below DCF value ${value:,.2f}"
-    if nvda_below_every_peer and earnings_persist:
+    if nvda_below_every_peer and earnings_persist and margin_ok:
         return ("WATCH/DEFER", f"price ${price:,.2f} above DCF value ${value:,.2f}, but NVDA "
                                "trades below every admitted peer on EV/EBITDA and the "
                                "earnings behind that multiple persist in this scenario")
+    if not margin_ok:
+        return ("DO NOT INITIATE", f"price ${price:,.2f} above DCF value ${value:,.2f}, and "
+                                   "gross margin breaks the 67% floor -- the competitive entry "
+                                   "I assumed was gradual")
     if not earnings_persist:
         return ("DO NOT INITIATE", f"price ${price:,.2f} above DCF value ${value:,.2f}, and "
                                    "EBITDA falls in this scenario, so the low trailing multiple "
@@ -863,7 +882,7 @@ def run_analysis(inputs=None):
             value = run["valuation"]["value_per_share"]
             persist = ebitda_persists(run)
             action, reason = decide(inputs["price"], value, comps["nvda_below_every_peer"],
-                                    persist)
+                                    persist, margin_holds(run["inputs"]))
             entry.update(value_per_share=value, action=action, reason=reason,
                          earnings_persist=persist,
                          fy2031_revenue=run["projection"][-1]["revenue"])
@@ -957,18 +976,22 @@ def visible_output(results):
             "range_per_share": f"${low:,.0f}-${high:,.0f} (DCF low-high); base ${mid:,.0f}",
             "conditions": [
                 "Watch holds only while NVDA's trailing EV/EBITDA stays below every admitted "
-                "peer's and the evidence keeps EBITDA growing.",
+                "peer's, the evidence keeps EBITDA growing, and gross margin stays at or above "
+                "67%.",
                 "Initiate condition: price at or below the base-case DCF value.",
-                "Downside evidence that flips the action: a reported quarter showing "
-                "year-over-year revenue decline or gross margin below 70% moves the evidence "
-                "toward the AI-capex-digestion case, where the rule gives DO NOT INITIATE.",
+                "Re-underwrite (Lab 12 conditions, kept): a defensible case for a cost of "
+                "equity materially below 16%, or a sourced, date-matched peer set trading at "
+                "20-30x trailing GAAP earnings that would make NVIDIA the outlier.",
+                "Escalate and rerun: excess purchase obligations above 12.8% of inventory "
+                "(Lab 12 trigger), or Compute & Networking growth below the forecast path.",
             ],
         },
         "reversal_trigger": (
             "INITIATE if NVDA closes at or below the base-case value per share. DO NOT "
-            "INITIATE if a 10-Q shows year-over-year revenue decline (the low-case path), or "
-            "if NVDA's trailing EV/EBITDA rises to or above the lowest admitted peer's. "
-            "Review at each 10-Q; next due for Q3 FY2027 (quarter ending late October 2026)."),
+            "INITIATE if a 10-Q shows year-over-year revenue decline (the low-case path), gross "
+            "margin below 67%, or NVDA's trailing EV/EBITDA at or above the lowest admitted "
+            "peer's. Review at each 10-Q; next due for Q3 FY2027 (quarter ending late October "
+            "2026)."),
         "checks": [{"check": c["check"], "passed": c["passed"]} for c in results["checks"]],
         "all_checks_passed": results["all_checks_passed"],
         "limitations": [

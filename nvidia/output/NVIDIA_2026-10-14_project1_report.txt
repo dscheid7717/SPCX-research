@@ -50,7 +50,7 @@ CASES (causal)
 
 WHAT-IFS (each off base) and the action the rule gives under each
   Hyperscaler capex pause (downside)             $    66.63  -> DO NOT INITIATE
-  Custom-silicon margin compression (downside)   $    73.75  -> WATCH/DEFER
+  Custom-silicon margin compression (downside)   $    73.75  -> DO NOT INITIATE
   Stock compensation treated as a cash cost      $    74.16  -> WATCH/DEFER
   Blume-adjusted beta                            $    92.89  -> WATCH/DEFER
 

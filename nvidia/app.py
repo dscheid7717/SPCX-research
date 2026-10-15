@@ -134,7 +134,8 @@ if run["valid"]:
     value = run["valuation"]["value_per_share"]
     comps = analysis.comparables()
     action, reason = analysis.decide(inputs["price"], value, comps["nvda_below_every_peer"],
-                                     analysis.ebitda_persists(run))
+                                     analysis.ebitda_persists(run),
+                                     analysis.margin_holds(inputs))
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("Value per share", f"${value:,.2f}", f"{value - base_value:+,.2f} vs base")
     m2.metric("Change vs base", f"{value / base_value - 1:+.1%}")

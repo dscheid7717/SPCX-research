@@ -66,7 +66,7 @@
       },
       "Custom-silicon margin compression (downside)": {
         "value_per_share": 73.75,
-        "action": "WATCH/DEFER"
+        "action": "DO NOT INITIATE"
       },
       "Stock compensation treated as a cash cost": {
         "value_per_share": 74.16,
@@ -116,12 +116,13 @@
     "reason": "price $221.30 above DCF value $78.83, but NVDA trades below every admitted peer on EV/EBITDA and the earnings behind that multiple persist in this scenario",
     "range_per_share": "$49-$115 (DCF low-high); base $79",
     "conditions": [
-      "Watch holds only while NVDA's trailing EV/EBITDA stays below every admitted peer's and the evidence keeps EBITDA growing.",
+      "Watch holds only while NVDA's trailing EV/EBITDA stays below every admitted peer's, the evidence keeps EBITDA growing, and gross margin stays at or above 67%.",
       "Initiate condition: price at or below the base-case DCF value.",
-      "Downside evidence that flips the action: a reported quarter showing year-over-year revenue decline or gross margin below 70% moves the evidence toward the AI-capex-digestion case, where the rule gives DO NOT INITIATE."
+      "Re-underwrite (Lab 12 conditions, kept): a defensible case for a cost of equity materially below 16%, or a sourced, date-matched peer set trading at 20-30x trailing GAAP earnings that would make NVIDIA the outlier.",
+      "Escalate and rerun: excess purchase obligations above 12.8% of inventory (Lab 12 trigger), or Compute & Networking growth below the forecast path."
     ]
   },
-  "reversal_trigger": "INITIATE if NVDA closes at or below the base-case value per share. DO NOT INITIATE if a 10-Q shows year-over-year revenue decline (the low-case path), or if NVDA's trailing EV/EBITDA rises to or above the lowest admitted peer's. Review at each 10-Q; next due for Q3 FY2027 (quarter ending late October 2026).",
+  "reversal_trigger": "INITIATE if NVDA closes at or below the base-case value per share. DO NOT INITIATE if a 10-Q shows year-over-year revenue decline (the low-case path), gross margin below 67%, or NVDA's trailing EV/EBITDA at or above the lowest admitted peer's. Review at each 10-Q; next due for Q3 FY2027 (quarter ending late October 2026).",
   "checks": [
     {
       "check": "Base year reconciles to the 10-K",

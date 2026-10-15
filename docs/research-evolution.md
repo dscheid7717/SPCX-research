@@ -7,7 +7,8 @@
 
 ## Edition A — unchanged Brightspace baseline
 
-**Brightspace receipt / attempt ID:** [DREW] · **Receipt timestamp:** [DREW]
+**Brightspace receipt / attempt ID:** [enter from Brightspace] · **Receipt timestamp:** [enter from Brightspace]
+**Git corroboration:** in the repository since commit `2808698` (2026-09-03 17:37 ET); unchanged since.
 **Repository copy:** `spacex/Project_1_Edition_A.md` — never edited after submission.
 
 The text between the rules below is the Edition A file, copied byte for byte.
@@ -98,19 +99,29 @@ SpaceX merits continued diligence, but the current evidence supports **watch–d
 
 *End of Edition A, reproduced unchanged.*
 
-## Dated correction addendum
+## Dated correction addendum — October 15, 2026
 
-**[DREW — write this yourself.]** Date it, and explain the company switch in your own words.
-Facts on record you may want to cite:
+**Correction: the Project 1 company is NVIDIA Corporation (NVDA), not SPCX.** Edition A above
+stays exactly as submitted; this addendum records why the analysis that follows is on a
+different company.
 
-- Edition A (above) was written on SPCX with a valuation date of September 1, 2026.
-- Lab 06 (2026-09-10) moved the valuation work to NVIDIA after the instructor directed the
-  class to use a company with an established published beta; SPCX listed in June 2026 and has
-  too little trading history for one (see `nvidia/NVIDIA_2026-10-01_lab12.md`, Stop 1).
+**Why the company changed** (my explanation as recorded in Lab 12, Stop 1, 2026-10-01): NVIDIA
+was not a free choice. This repository began as SPCX research and is still named
+`SPCX-research` so that lab links already submitted on Brightspace keep resolving. The
+instructor directed the class to a company with an **established published beta**; SPCX listed
+in June 2026 and has too little trading history for one to exist. NVIDIA became the company for
+Labs 05–08 on those grounds and, as of 2026-09-22, for all work including Project 1.
 
-- Commit `89d7202` (2026-09-22) made NVIDIA the company for all work, Project 1 included.
-- Effect on the analysis: Edition A's SPCX evidence is not carried into Edition B; the SPCX
-  work remains on disk unchanged in `spacex/`.
+**Source and dates:** the switch first appears in Lab 06 (2026-09-10, commit `0879393`) and was
+made final for all work in commit `89d7202` (2026-09-22). Edition A has been in the repository
+unchanged since commit `2808698` (2026-09-03 17:37 ET).
+
+**Effect on the analysis:** none of Edition A's SPCX evidence is carried into Edition B. What
+carries over is the decision frame — initiate, watch/defer or do not initiate for a committee
+with no position — and the discipline Edition A set out: anchor on free cash flow rather than
+Adjusted EBITDA, verify price and diluted share count before asserting value, and require a
+discount to conservative value before initiating. The SPCX work stays on disk unchanged in
+`spacex/`.
 
 ## Edition B — after project-specific research and disclosed AI assistance
 
@@ -124,35 +135,43 @@ price. The DCF never supports the price; the name stays on watch rather than bei
 because NVIDIA trades below both admitted peers on EV/EBITDA (40.3× vs AVGO 50.7× and AMD
 138.3×) while earning the highest EBITDA margin (61.7%), and — in the base case — the earnings
 behind that multiple keep growing. In the AI-capex-digestion case (EBITDA falls in FY2028) the
-same rule gives **DO NOT INITIATE**.
+same rule gives **DO NOT INITIATE**, as it does if gross margin breaks my 67% floor.
 
 ### A-to-B evidence table
 
 | Item | Edition A (SPCX, 2026-09-01) | Edition B (NVDA, 2026-10-14) | Primary driver of change | Evidence / test justifying the position |
 |---|---|---|---|---|
-| Thesis / recommendation | WATCH–DEFER on SPCX: exceptional assets, but FCF too volatile to underwrite; no fair value asserted | WATCH/DEFER on NVDA: DCF $49–$115 vs $221 price; relative value holds it on watch; DO NOT INITIATE if EBITDA falls | **mixed**: course instruction (company switch); own analysis (Labs 06–12); AI (10-Q re-anchoring surfaced in the Project 1 session) | decision rule applied to every case (`nvidia/analysis.py`); case/what-if actions in `nvidia/visible_output.json` |
+| Thesis / recommendation | WATCH–DEFER on SPCX: exceptional assets, but FCF too volatile to underwrite; no fair value asserted | WATCH/DEFER on NVDA: DCF $49–$115 vs $221 price; relative value holds it on watch; DO NOT INITIATE if EBITDA falls or gross margin breaks 67% | **mixed**: course instruction (company switch); own analysis (Labs 06–12); AI (10-Q re-anchoring surfaced in the Project 1 session) | decision rule applied to every case (`nvidia/analysis.py`); case/what-if actions in `nvidia/visible_output.json` |
 | Data / source choice | SPCX Q2 2026 10-Q; no verified price, share count or EV | NVDA FY2026 10-K + Q2 FY2027 10-Q; one price date (2026-10-14) for NVDA and both peers; peer facts from SEC XBRL with accessions | course instruction (beta history); own analysis; AI (XBRL retrieval) | independent definition check: XBRL 39,520 rejected for the 10-K line 51,951; base year reconciles to filed totals |
 | Assumption / model design | sum-of-parts on normalised FCF intended; Adjusted EBITDA not a substitute for FCF | five-year three-statement pro-forma driving an FCFF DCF; FY2027E re-anchored to H1 reported + Q2 run rate (+71.5%, was 30%); GM from 75% (normalised for the 4,000 write-down); equity stakes added to the bridge | **own analysis + AI**: the 10-Q showed H1 revenue +95.8%, so the Lab 10 30% would have required H2 to shrink | FCFF↔FCFE reconciliation, balance and cash-tie checks, directional tests committed before execution (`93a7ac9`) |
 | Risk / limitation / uncertainty | capex intensity, AI losses, customer concentration, unknown peers | the discount rate: price implies beta 0.51 (Ke 7.74%) vs my 2.216 (Ke 16.27%); TV 57% of EV; two-peer set; Jan-2026 balance-sheet dating | **peer challenge** (Colin, Lab 12: "How did you choose your beta?") + own analysis | WACC × g grid $66–$99; Blume what-if $93; reverse DCF |
 
 ### What changed from Edition A to Edition B, and why?
 
-**[DREW — write this paragraph in your own words.]** Points the evidence supports:
+**The label did not change; everything under it did.** Edition A said watch–defer on SPCX
+because value could not yet be tested — no verified price, share count or normalised free cash
+flow. Edition B says watch/defer on NVIDIA because value *was* tested, and the methods disagree
+in a way I can name. The causes, separated:
 
-1. *Course instruction* changed the company. Nothing about SPCX's business drove it.
-2. *Own analysis* (Labs 06–12) produced the method: DCF, comps, pro-forma, sensitivity, and the
-   finding that the disagreement with the market sits in the discount rate, not operations.
+- **Course instruction** changed the company (see the addendum). Nothing about SPCX's business
+  drove it.
+- **My own analysis** (Labs 06–12) produced the method and moved the call. Lab 06 said *do not
+  initiate* on a $57.06 DCF value against a $218.36 price. Lab 08 revised it to watch–defer — a
+  valuation-conviction change, not a business-quality one: NVIDIA carried the lowest trailing
+  multiple in its own peer group while earning the best margins, which did not make my DCF wrong
+  but made me less willing to act on it alone. Lab 11 showed no operating assumption I can
+  defend closes the gap to the market, so the disagreement is the discount rate.
+- **Peer challenge.** Colin's Lab 12 question — "How did you choose your beta?" — exposed that I
+  misdescribed my own beta build. The number did not move, but beta is the input carrying the
+  answer, and the reverse DCF now shows the price needs a beta of 0.51 against my 2.216.
+- **AI assistance** surfaced that the Q2 FY2027 10-Q, filed before my Lab 10 work, contradicted
+  my 30% FY2027 growth driver (H1 was +95.8%). Re-anchoring it raised the base value from $58 to
+  $79. It did not change the action: no evidence-supported case reaches the $221.30 price.
 
-3. *Peer challenge* (Colin) exposed that I could not describe my own beta build — the input
-   carrying the answer.
-
-4. *AI assistance* surfaced that the published Q2 FY2027 10-Q contradicted my FY2027 growth
-   driver. The base value rose from Lab 10's $58 to $79, but the action did not change: no
-   evidence-supported case reaches the price.
-
-5. The thesis label stayed WATCH–DEFER across both editions, for different reasons and on a
-   different company — Edition A deferred because value could not be tested; Edition B defers
-   because it was tested and the DCF and relative value disagree.
+The evidence that confirmed the unchanged action is specific: the full DCF range of $49–$115
+sits below the price in every case, while NVIDIA's EV/EBITDA (40.3×) stays below both peers'.
+The same rule gives **do not initiate** if EBITDA falls or gross margin breaks my 67% floor —
+which is what would move the call next.
 
 ---
 

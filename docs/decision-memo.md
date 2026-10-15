@@ -55,7 +55,7 @@ The DCF sets the range. The comps only decide whether the name stays on watch.
 | **Base** (H1 + flat H2; then 22/16/11/7%; GM 75% → 69%) | $79 | WATCH/DEFER |
 | **High: sustained build-out** (+80%, then 30/20/12/7%; GM 74%; Blume beta 1.815) | $115 | WATCH/DEFER |
 | Hyperscaler pause (FY2028 growth 0%) | $67 | **DO NOT INITIATE** |
-| Custom-silicon margin compression (GM 65% from FY2029) | $74 | WATCH/DEFER |
+| Custom-silicon margin compression (GM 65% from FY2029) | $74 | **DO NOT INITIATE** (breaks my 67% floor) |
 | Stock compensation treated as a cash cost | $74 | WATCH/DEFER |
 | Blume-adjusted beta 1.815 | $93 | WATCH/DEFER |
 | WACC ±2pp × terminal growth 2–4% grid | $66–$99 | — |
@@ -69,9 +69,11 @@ then to FY2028 growth.
 |---|---|---|---|
 | Price | NVDA closes at or below base-case value (~$79) | daily | **INITIATE** review |
 | Demand turn | any 10-Q with year-over-year revenue decline | each 10-Q | **DO NOT INITIATE** |
-| Competitive entry | gross margin below 70% for a reported quarter | each 10-Q | rerun; low-case path |
+| Competitive entry | gross margin below 67% (my Lab 11/12 floor) | each 10-Q | **DO NOT INITIATE** |
 | Relative value lost | NVDA EV/EBITDA at or above the lowest admitted peer | each review | **DO NOT INITIATE** |
-| Over-ordering | excess purchase obligations above 15% of inventory | each 10-Q | escalate |
+| Over-ordering | excess purchase obligations above 12.8% of inventory | each 10-Q | escalate and rerun |
+| Segment deceleration | Compute & Networking growth below the forecast path | each 10-Q | escalate and rerun |
+| Re-underwrite | defensible cost of equity materially below 16%, or peers at 20–30× trailing GAAP P/E | as evidence arrives | rerun valuation |
 | Model integrity | any accounting or bridge check fails | every run | no value reported |
 
 **Known limitations:**
