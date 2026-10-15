@@ -1,0 +1,18 @@
+PROJECT: FIN 43900 Project 1 -- NVIDIA (NVDA) Corporate Finance Application
+STUDENT: Drew Scheiderer
+VIDEO: 3 Committee Presentation
+STABLE VIDEO ID/URL: [YouTube Unlisted URL]
+TITLE: [descriptive title]
+DURATION: [mm:ss] (5:00 max)
+REPOSITORY COMMIT/FROZEN VERSION: [commit hash]
+
+# Required evidence moments -- replace each bracket with the corrected caption text
+# and its real timestamp. Delete these two comment lines before submitting.
+[00:00] Drew Scheiderer: [LIVE DEMO opens: streamlit run app.py; committee view]
+[mm:ss] Drew Scheiderer: [move one bounded driver; explain change vs restored base]
+[mm:ss] Drew Scheiderer: [inject a fault -- checks go red, model refuses; reset to base recovers $78.83]
+[mm:ss] Drew Scheiderer: [defend WATCH/DEFER with the tool on screen: range, comps, reverse DCF]
+[mm:ss] Drew Scheiderer: [risks and reversal triggers]
+[mm:ss] Drew Scheiderer: [COMMITTEE ASK]
+
+END OF CORRECTED TRANSCRIPT

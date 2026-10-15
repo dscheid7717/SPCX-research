@@ -1,146 +1,169 @@
-# FIN 43900 Project 1 — Equity Research
+# FIN 43900 Project 1 — NVIDIA (NVDA) Corporate Finance Application
 
-Equity research on **NVIDIA Corporation (NVDA)** for FIN 43900, AI in Finance, Purdue
-University, Fall 2026. Author: Drew Scheiderer.
-
-> **Company switch, 2026-09-22.** This repository began as SPCX (Space Exploration
-> Technologies Corp.) research and is still named `SPCX-research` so that lab links already
-> submitted on Brightspace keep resolving. The company for all work from 2026-09-22 forward is
-> NVIDIA. The SPCX material in `spacex/` is left exactly as it stood and is not extended.
+Equity valuation and committee decision on **NVIDIA Corporation (NVDA)** for FIN 43900, AI in
+Finance, Purdue University, Fall 2026. Author: Drew Scheiderer.
 
 > This repository is coursework for a learning exercise. It is not investment research and it
 > is not financial advice.
 
+> **Company switch, 2026-09-22.** This repository began as SPCX (Space Exploration
+> Technologies Corp.) research and is still named `SPCX-research` so that lab links already
+> submitted on Brightspace keep resolving. Edition A was written on SPCX and is preserved
+> unchanged in `spacex/`; the switch is explained in the dated addendum in
+> `docs/research-evolution.md`.
+
 ## Finance decision and intended user
 
-**Decision:** initiate, watch-defer, or do not initiate a position in NVDA.
-
-**Intended user:** a buy-side investment committee with no current position, which needs a
-risk-aware recommendation and a focused diligence plan before committing capital.
-
-**As-of date:** September 17, 2026. **Current call: WATCH–DEFER**, carried from the Lab 08
-triangulation — revised up from Lab 06's *do not initiate* on a valuation-conviction change, not
-a business-quality one. The reasoning and the conditions that would flip it are in
-[nvidia/NVIDIA_2026-09-17_lab08.md](nvidia/NVIDIA_2026-09-17_lab08.md).
-
-The evidence base is NVIDIA's Form 10-K for the fiscal year ended January 25, 2026, with market
-data as of September 10, 2026 and peer earnings traced to SEC XBRL filing tags. Sources and
-as-of dates are carried in the Lab 06 and Lab 08 write-ups.
-
-The superseded SPCX call — WATCH–DEFER as of September 3, 2026, on the Q2 2026 Form 10-Q — is
-preserved in [spacex/SpaceX_2026-09-03_report.md](spacex/SpaceX_2026-09-03_report.md) and
-[spacex/sources.md](spacex/sources.md). It is history, not the current position.
+**Decision:** initiate, watch/defer, or do not initiate a long position in NVDA.
+**Intended user:** a buy-side investment committee with no current position.
+**Horizon:** 3–5 year holding period; five-year explicit forecast FY2027E–FY2031E plus a
+terminal value. **As-of date:** October 14, 2026 (price $221.30).
+**Currency and share basis:** USD millions; per-share values in USD on **24,514M diluted**
+weighted-average shares (FY2026 10-K EPS note).
+**Exclusions:** equity-investment gains are excluded from the operating forecast and the
+stakes are carried in the bridge instead; operating leases are treated as operating costs;
+transaction multiples are not used because no defensible control comparable exists.
 
 ## Visible result
 
-**Not yet produced.** The DCF model and its executed output land in Week 3 (Labs 05–06); a
-frozen `visible_output.json` and application view are Project 1 deliverables. This section
-will point to that frozen output — material inputs, as-of date, valuation range, and
-conditions — readable without executing anything.
+**Committee action: WATCH/DEFER.** FCFF DCF range **$49–$115 per share, base $79**, against a
+$221.30 price. The name stays on watch, not rejected, because NVIDIA trades below both admitted
+peers on trailing EV/EBITDA (40.3× vs 50.7× and 138.3×) while its earnings keep growing in the
+base case. In the AI-capex-digestion case the same rule gives **DO NOT INITIATE**.
 
-## Repository map
+Readable without running anything:
 
-Work is organised one company per folder.
-
-| Path | Contents |
-|---|---|
-| `dcf.py` | Lab 05 five-year FCFF DCF, carrying the training-case inputs and matching the twelve known answers. |
-| `spacex/Project_1_Edition_A.md` | Edition A — the timestamped pre-AI baseline. **Never edited after the fact**; corrections are filed as dated addenda in the research-evolution document. |
-| `spacex/SpaceX_2026-09-03_report.md` | Company research report: sourced financial analysis, the current call, and what would change it. |
-| `spacex/sources.md` | Citation-to-use map — every source in the report traced to its original location and to where it is used. |
-| `spacex/data/SpaceX_Q2_2026_10-Q.xls` | Local copy of the Q2 2026 Form 10-Q financial workbook (EDGAR Online export). |
-| `nvidia/NVIDIA_2026-09-10_lab06.md` | Lab 06 write-up: sourced inputs, sensitivity grid, reverse DCF, reasonableness, and the conditional call. |
-| `nvidia/dcf.py` | Lab 06 model — twelve lines, sensitivity grid, reverse DCF, and the training-case self-check, from one command. |
-| `nvidia/data/NVIDIA_2026-01-25_10-K.xls` | Local copy of the FY2026 Form 10-K financial workbook (EDGAR Online export). |
-| `nvidia/NVIDIA_2026-09-17_lab08.md` | Lab 08 write-up: peer policy, two sourced candidate decisions, checked comparison, DCF triangulation, and the revised conditional call. |
-| `nvidia/comps.py` | Lab 08 NVIDIA comparables calculator. Imports its analysis layer from `asbury/comps.py`, adding a share-basis check and an earnings-basis sensitivity. |
-| `asbury/Asbury_2026-09-15_lab07.md` | Lab 07 write-up: peer policy, use/qualify decisions, implied range, and the leave-one-peer-out interpretation. |
-| `asbury/comps.py` | Lab 07 comparable-company P/E calculator for the Asbury training case. |
-| `proforma.py` | Lab 09 five-year three-statement pro-forma engine, carrying the Asbury training case and matching its published $291.75. |
-| `asbury/Asbury_2026-09-22_lab09.md` | Lab 09 write-up: assumption set, the engine, the known-answer validation, and the judgment sensitivity. |
-| `asbury/sensitivity.py` | Lab 09 judgment sensitivity over the pro-forma assumptions. |
-| `nvidia/beta.py` | Lab 09 equity beta estimated from price history under five specifications; supplies the 16.03% cost of equity. |
-| `nvidia/data/NVIDIA_2026-09-22_beta_prices.csv` | Cached adjusted closes for NVDA and the S&P 500, so the beta estimate is reproducible offline. |
-| `nvidia/NVIDIA_2026-09-24_lab10.md` | Lab 10 write-up: three years of sourced history, the labelled assumption set, the named company-specific line, the checks, and the market comparison. |
-| `nvidia/proforma.py` | Lab 10 NVIDIA pro-forma — a sibling of the root engine, with R&D, interest income, stock compensation and the supply-obligation line. |
-| `nvidia/NVIDIA_2026-09-29_lab11.md` | Lab 11 write-up: two operating drivers, the locked prediction and its reconciliation, the driver ranking, and the partner exchanges. |
-| `nvidia/sensitivity.py` | Lab 11 one-at-a-time sensitivity rig. Snapshots all 24 independent inputs and restores them before every run; `--selftest` proves the rig, `--trace` prints statements for one run. |
-| `nvidia/NVIDIA_2026-09-29_lab11_locked_prediction.md` | Locked Changed-Input Record — the human-authored prediction, committed before the first sensitivity run. |
-| `nvidia/output/` | Frozen visible output for Lab 11: the base run and the sensitivity run, readable without executing anything. |
-| `requirements.txt` | Pinned dependency ranges, mirroring the course project environment. |
-| `.env.example` | Named-but-empty credential variables. No secrets are committed anywhere. |
-
-**A note on the company history.** Labs 06 and 08 were run on NVIDIA after the instructor
-directed the class to use a company with an established published beta — SpaceX listed in June
-2026 and has too little trading history for one to exist. As of 2026-09-22 NVIDIA is the company
-for all work, Project 1 included, so the two-company split is closed. The SPCX files in
-`spacex/` are unchanged and remain the record of that earlier work; `spacex/Project_1_Edition_A.md`
-in particular is a timestamped pre-AI baseline and is never edited.
-
-Lab 07 uses the Asbury Automotive training case supplied by the course, kept in `asbury/`
-so it stays separate from the Project 1 company work.
+- [`nvidia/output/NVIDIA_2026-10-14_project1_report.txt`](nvidia/output/NVIDIA_2026-10-14_project1_report.txt)
+  — every check, the five-year statements, the DCF and bridge, cases, what-ifs, the WACC ×
+  growth grid, the reverse DCF, comparables and the action.
+- [`nvidia/visible_output.json`](nvidia/visible_output.json) — the frozen contract the app
+  renders: material inputs, as-of date, range, action, conditions, reversal trigger, units,
+  limitations.
+- [`docs/decision-memo.md`](docs/decision-memo.md) — the two-page committee memo.
 
 ## Setup and run
+
+On Windows, clone to a short path (for example `C:\p1`) or enable long paths: the cold run
+showed pip silently skips streamlit's nested files under a long folder path
+(`docs/cold-run-log.txt`).
 
 1. Create an isolated environment: `python -m venv .venv`
 2. Activate it — Windows: `.venv\Scripts\activate` · macOS/Linux: `source .venv/bin/activate`
 3. Install dependencies: `pip install -r requirements.txt`
 4. Copy `.env.example` to `.env` only if a data provider key is needed. Never commit `.env`.
+   No key is needed to reproduce the result — all inputs are frozen in the code.
+5. From the `nvidia` folder:
+   - tests: `python -m unittest test_project -v`
+   - analysis: `python analysis.py` (add `--freeze` to rewrite the frozen output)
+   - app: `streamlit run app.py`
 
-The Week 3 DCF models use only the Python standard library. Run the Lab 05 training-case model
-with `python dcf.py`, and the Lab 06 NVIDIA model with `cd nvidia && python dcf.py`. The Lab 07
-comparables calculators are also standard library only: `cd asbury && python comps.py` for
-the Lab 07 training case, and `cd nvidia && python comps.py` for the Lab 08 NVIDIA comparison.
+The finance engine is standard library only; pandas and streamlit are used by the app.
 
-The pro-forma models are standard library only as well: `python proforma.py` from the root runs
-the Lab 09 Asbury training case and must still print $291.75, and `cd nvidia && python proforma.py`
-runs the Lab 10 NVIDIA build. `cd nvidia && python proforma.py --prove-refusal` demonstrates that
-the model stops rather than valuing an unbalanced sheet. The Lab 09 beta estimate runs with
-`cd nvidia && python beta.py`; it reads the cached price file and needs no network.
-The NVIDIA calculator imports the Lab 07 analysis functions, so the arithmetic it runs is the
-version already checked against the course's published answers.
+## Repository map
+
+### Required analysis-to-interface flow
+
+**evidence → analysis → tests → frozen visible output → app.**
+1. Sourced inputs carry source and as-of date in `nvidia/analysis.py` (facts block,
+   `DRIVER_RECORD`, `NORMALIZATIONS`, `COMPANIES`) and in the data ledger in
+   `docs/validation-and-ai-use.md`.
+2. `nvidia/analysis.py` computes every material result. It drives the Lab 10 pro-forma
+   (`nvidia/proforma.py`) and the Lab 06 DCF functions (`nvidia/dcf.py`) without editing them.
+3. `nvidia/test_project.py` runs 27 tests: known answers, articulation, bridge, directional
+   changed-input tests, DCF boundaries, highest-risk failures, peer policy, reproducibility.
+4. `python analysis.py --freeze` refuses to write unless every check passes, then writes
+   `nvidia/visible_output.json` and the frozen report.
+5. `nvidia/app.py` renders the frozen contract, and its what-if panel calls the same engine.
+
+### Project 1 files
+
+| Path | Contents |
+|---|---|
+| `nvidia/analysis.py` | Project 1 engine: Edition B drivers, FCFF DCF from the pro-forma, WACC, bridge, cases, what-ifs, grid, reverse DCF, comparables, decision rule |
+| `nvidia/test_project.py` | Validation suite (27 tests) |
+| `nvidia/app.py` | Streamlit committee app: frozen view + bounded what-if panel, reset to base, fault switch |
+| `nvidia/visible_output.json` | Frozen visible output |
+| `nvidia/output/NVIDIA_2026-10-14_project1_report.txt` | Frozen executed report |
+| `docs/research-evolution.md` | Edition A (unchanged), dated addendum, Edition B and the A-to-B table |
+| `docs/decision-memo.md` | Two-page decision memo |
+| `docs/validation-and-ai-use.md` | Data ledger, validation register, Locked Changed-Input Record, AI-use register |
+| `docs/cold-run-log.txt` | Clean end-to-end run in a fresh clone and environment |
+| `docs/transcript-video-{1,2,3}.txt` | Corrected video transcripts |
+| `project-submission-manifest.csv` | The 12-row submission manifest |
+
+### Lab record (unchanged)
+
+| Path | Contents |
+|---|---|
+| `dcf.py`, `proforma.py` | Lab 05 / Lab 09 training-case engines (match the course's known answers) |
+| `asbury/` | Lab 07 comps and Lab 09 sensitivity on the Asbury training case |
+| `nvidia/dcf.py`, `nvidia/comps.py`, `nvidia/proforma.py`, `nvidia/sensitivity.py`, `nvidia/beta.py` | Lab 06, 08, 10, 11 and 09 NVIDIA models |
+| `nvidia/NVIDIA_2026-*_lab*.md` | Lab 06–12 write-ups, including the Lab 11 locked prediction |
+| `nvidia/data/` | FY2026 10-K workbook; cached beta price history |
+| `spacex/` | Superseded SPCX work and **Edition A — never edited** |
 
 ## Data sources and point-in-time boundary
 
-Nothing in this repository incorporates information published after the stated as-of date of
-each document.
+Nothing published after **October 14, 2026** is used.
 
-The superseded SPCX work draws on SpaceX's Form 10-Q for the quarter and six months ended
-June 30, 2026, SEC accession 0001628280-26-052535, filed August 4, 2026, as reported for those
-periods.
+- **NVIDIA Form 10-K**, FY ended January 25, 2026, filed February 25, 2026, accession
+  `0001045810-26-000021` — base year, opening balance sheet, bridge.
+- **NVIDIA Form 10-Q**, quarter ended July 26, 2026, filed August 26, 2026, accession
+  `0001045810-26-000075` — H1 FY2027 actuals that anchor the FY2027E drivers.
+- **AMD Form 10-K** FY2025 (accession `0000002488-26-000018`) and **Broadcom Form 10-K**
+  FY2025 (accession `0001730168-25-000121`), via SEC XBRL company facts.
+- **Market data:** NVDA, AMD and AVGO closes and the 10-year Treasury yield (^TNX), Yahoo
+  Finance via `yfinance`, **close October 14, 2026**. Beta uses five years of monthly prices
+  cached September 22, 2026.
 
-For the NVIDIA valuation, the primary source is NVIDIA's Form 10-K for the fiscal year ended
-January 25, 2026, filed February 25, 2026. Market data — share price, beta, and the 10-year
-Treasury yield — is as of September 10, 2026 and is labeled with its retrieval date in the
-Lab 06 write-up.
+## Financial conventions and assumptions
 
-Lab 07 uses the course's frozen Asbury case inputs: December 31, 2024 closing prices paired
-with FY2024 total GAAP diluted EPS. No data is fetched at run time.
+USD millions unless stated; negatives in parentheses in write-ups; percentages labelled.
+Fiscal years end in late January (FY2026 is mostly calendar 2025). Each input is labelled
+`fact`, `history`, `normalization`, `judgment`, `estimate` or `model output`. Every
+load-bearing driver carries value · basis · challenge · evidence that would change it, in
+`DRIVER_RECORD` in `nvidia/analysis.py`. FCFF = EBIT(1 − t) + D&A + SBC − capex − Δworking
+capital + Δpurchase-obligation accrual. The discount rate is the WACC: CAPM cost of equity
+(5.19% + 2.216 × 5%) at a 99.84% equity weight. Terminal growth is 3%.
 
-Lab 08 compares NVIDIA against AMD and Broadcom at September 10, 2026 closing prices — the same
-trading date and price source as the Lab 06 DCF — paired with each company's latest total GAAP
-diluted EPS from an annual report published before that date. Peer earnings are traced to the
-SEC XBRL `EarningsPerShareDiluted` filing tag with period, form type and accession number. Inputs
-are frozen in the file; nothing is fetched at run time.
+## Validation and changed-input tests
 
-## Financial conventions
+See `docs/validation-and-ai-use.md` for the full register. In brief:
+- **Known answers:** the 12 Lab 06 training answers and the Asbury $291.75 are reproduced.
+- **Independent definition check:** the XBRL figure of 39,520 was rejected in favour of the
+  10-K "marketable securities" line of 51,951.
+- **Directional tests:** written and committed before first execution (`93a7ac9`).
+- **Articulation:**
+  - the balance sheet balances every year;
+  - the cash flow statement ties to balance-sheet cash;
+  - the base year reconciles to the filing;
+  - FCFF reconciles to FCFE.
+- **DCF boundary and bridge:** the WACC × growth grid moves in the expected directions, and
+  the model refuses to value when terminal growth is at or above WACC.
+- **Highest-risk failures:** the model refuses to value if stock compensation isn't credited
+  to equity, or if an opening balance is mis-mapped.
+- **Peer-policy checks.**
+- **Cold run:** `docs/cold-run-log.txt`.
 
-Dollar amounts are in USD millions unless stated otherwise. Negative values appear in
-parentheses. Historical results, forecasts, and scenarios are labeled distinctly. Any figure
-that could not be sourced is labeled `unresolved`, `estimate`, or `placeholder` rather than
-carried as fact.
+## Known limitations, monitoring, and reversal triggers
 
-## Known limitations
+- The forecast is dated from the January 2026 balance sheet, but the price is from October
+  2026. Debt has since risen to 33,366.
+- WACC rests on beta: switching from the raw beta to the Blume-adjusted beta moves value from
+  $79 to $93.
+- The price implies a beta of 0.51 on my operating forecast.
+- Only two peers are admitted, and their multiples are trailing.
 
-Edition A records the open questions in full. The material ones: no verified share price,
-fully diluted share count, or enterprise value; no segment-level free cash flow; no
-established normalized capital-expenditure run rate for the AI segment; and no peer set or
-multiple range for segment valuation. Adjusted EBITDA is reported by the company but is not
-treated as a substitute for free cash flow.
+**Reversal triggers:**
+- **INITIATE** if the price is at or below the base-case value.
+- **DO NOT INITIATE** if a 10-Q shows a year-over-year revenue decline, or if NVIDIA's
+  EV/EBITDA reaches the lowest admitted peer's.
+- Review at each 10-Q.
 
 ---
 
-*AI assistance: research and drafting assisted by ChatGPT/Codex and Claude Code; sources
-gathered and verified by me; the judgments are mine.*
+*AI assistance: research, code and drafting assisted by Claude Code (Claude Opus 5.5) and
+ChatGPT/Codex, as recorded in `docs/validation-and-ai-use.md`; sources gathered and verified by
+me; the judgments are mine.*
 
 *Any remaining errors are my own.*

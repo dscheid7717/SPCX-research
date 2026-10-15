@@ -1,0 +1,13 @@
+item,required,location_or_url,title,duration_or_as_of,timestamp_index,access_checked,frozen_or_commit_id,notes
+Research-Evolution.pdf,yes,Brightspace attachment; repo docs/research-evolution.pdf,Research Evolution -- NVDA Project 1,as of 2026-10-14,,,,Edition A (SPCX) embedded unchanged; addendum explains company switch
+Repository,yes,https://github.com/dscheid7717/SPCX-research,SPCX-research (NVIDIA Project 1),as of 2026-10-14,,,,Repo name kept so earlier lab links resolve
+Visible executed output,yes,https://github.com/dscheid7717/SPCX-research/blob/main/nvidia/output/NVIDIA_2026-10-14_project1_report.txt,Frozen report + nvidia/visible_output.json,as of 2026-10-14,,,,Readable without running code
+Decision memo or deck,yes,Brightspace attachment; repo docs/decision-memo.pdf,Decision Memo -- NVIDIA (NVDA),as of 2026-10-14,,,,Two pages max
+Validation-and-AI-Use.pdf,yes,Brightspace attachment; repo docs/validation-and-ai-use.md,Validation and AI Use -- NVDA Project 1,as of 2026-10-14,,,,Frozen record
+Video 1,yes,,,,,,,Research evolution; 3:00 max; YouTube Unlisted
+Transcript Video 1,yes,docs/transcript-video-1.txt,,,,,,
+Video 2,yes,,,,,,,Codebase walkthrough; 5:00 max; YouTube Unlisted
+Transcript Video 2,yes,docs/transcript-video-2.txt,,,,,,
+Video 3,yes,,,,,,,Committee presentation; live demo first; 5:00 max; YouTube Unlisted
+Transcript Video 3,yes,docs/transcript-video-3.txt,,,,,,
+Optional deployed output,no,,,,,,,Not deployed; app runs locally with streamlit run app.py

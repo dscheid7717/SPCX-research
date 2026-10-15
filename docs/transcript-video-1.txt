@@ -1,0 +1,18 @@
+PROJECT: FIN 43900 Project 1 -- NVIDIA (NVDA) Corporate Finance Application
+STUDENT: Drew Scheiderer
+VIDEO: 1 Research Evolution
+STABLE VIDEO ID/URL: [YouTube Unlisted URL]
+TITLE: [descriptive title]
+DURATION: [mm:ss] (3:00 max)
+REPOSITORY COMMIT/FROZEN VERSION: [commit hash]
+
+# Required evidence moments -- replace each bracket with the corrected caption text
+# and its real timestamp. Delete these two comment lines before submitting.
+[00:00] Drew Scheiderer: [Edition A thesis -- SPCX, WATCH-DEFER, 2026-09-01]
+[mm:ss] Drew Scheiderer: [why the company changed to NVIDIA -- course instruction]
+[mm:ss] Drew Scheiderer: [Edition B thesis -- NVDA WATCH/DEFER, $49-$115, base $79]
+[mm:ss] Drew Scheiderer: [what drove the change: course / own analysis / peer (Colin) / AI]
+[mm:ss] Drew Scheiderer: [ONE AI CLAIM, THE CHECK, THE VERDICT -- e.g. XBRL 39,520 vs 10-K 51,951, rejected]
+[mm:ss] Drew Scheiderer: [why the evidence was enough]
+
+END OF CORRECTED TRANSCRIPT

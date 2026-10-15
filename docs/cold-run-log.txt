@@ -1,0 +1,80 @@
+COLD-RUN LOG -- Project 1, NVIDIA (NVDA)
+Requirement: one clean end-to-end run in a fresh environment, recorded, noting the first failure and time to visible output.
+Procedure: git clone of the repository at commit 9222448 into an empty folder; new python -m venv; pip install -r requirements.txt; unit tests; analysis.py; diff of the fresh report against the committed frozen report; Streamlit AppTest smoke test of app.py.
+Machine: Windows 11 (10.0.26200), host Python 3.12.10. Logs below are unedited apart from long pip notices.
+
+=============================== RUN 1 -- FAILED ===============================
+COLD RUN -- started 2026-10-15T12:43:12-04:00
+Machine: MINGW64_NT-10.0-26200 3.6.6-1cdd4371.x86_64; host Python: Python 3.12.10
+Source: git clone of local repository, HEAD 9222448
+--- step 1: clone
+ok
+--- step 2: fresh venv
+ok
+--- step 3: pip install -r requirements.txt
+exit 0
+matplotlib==3.11.2
+numpy==2.5.4
+pandas==2.3.3
+scipy==1.18.1
+yfinance==1.7.0
+--- step 4: tests
+----------------------------------------------------------------------
+Ran 27 tests in 0.104s
+OK
+--- step 5: analysis
+exit 0
+COMMITTEE ACTION: WATCH/DEFER -- price $221.30 above DCF value $78.83, but NVDA trades below every admitted peer on EV/EBITDA and the earnings behind that multiple persist in this scenario
+--- step 6: compare fresh report to committed frozen report
+identical
+--- step 7: app smoke test
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+  File "C:\Users\dsche\AppData\Local\Temp\claude\c--Users-dsche-Documents-Courses-AIFinance2026\297ab188-d6fe-441a-ab02-a6e435fa1e01\scratchpad\coldrun\venv\Lib\site-packages\streamlit\__init__.py", line 62, in <module>
+    from streamlit import config as _config
+  File "C:\Users\dsche\AppData\Local\Temp\claude\c--Users-dsche-Documents-Courses-AIFinance2026\297ab188-d6fe-441a-ab02-a6e435fa1e01\scratchpad\coldrun\venv\Lib\site-packages\streamlit\config.py", line 30, in <module>
+    from streamlit import config_util, development, env_util, file_util, util
+  File "C:\Users\dsche\AppData\Local\Temp\claude\c--Users-dsche-Documents-Courses-AIFinance2026\297ab188-d6fe-441a-ab02-a6e435fa1e01\scratchpad\coldrun\venv\Lib\site-packages\streamlit\config_util.py", line 28, in <module>
+    from streamlit import cli_util, toml_writer, url_util
+  File "C:\Users\dsche\AppData\Local\Temp\claude\c--Users-dsche-Documents-Courses-AIFinance2026\297ab188-d6fe-441a-ab02-a6e435fa1e01\scratchpad\coldrun\venv\Lib\site-packages\streamlit\cli_util.py", line 22, in <module>
+    from streamlit import env_util, errors
+  File "C:\Users\dsche\AppData\Local\Temp\claude\c--Users-dsche-Documents-Courses-AIFinance2026\297ab188-d6fe-441a-ab02-a6e435fa1e01\scratchpad\coldrun\venv\Lib\site-packages\streamlit\errors.py", line 22, in <module>
+    from streamlit import util
+  File "C:\Users\dsche\AppData\Local\Temp\claude\c--Users-dsche-Documents-Courses-AIFinance2026\297ab188-d6fe-441a-ab02-a6e435fa1e01\scratchpad\coldrun\venv\Lib\site-packages\streamlit\util.py", line 24, in <module>
+    from streamlit.proto.RootContainer_pb2 import RootContainer
+ModuleNotFoundError: No module named 'streamlit.proto'
+COLD RUN -- finished 2026-10-15T12:47:59-04:00; elapsed 287 s
+
+FIRST FAILURE AND DIAGNOSIS
+- Failing step: app smoke test (step 7). Tests, analysis and the frozen-report diff all passed.
+- Symptom: ModuleNotFoundError: No module named 'streamlit.proto'. The directory site-packages/streamlit/proto was never written.
+- Cause: Windows long paths are disabled on this machine (HKLM ... FileSystem\LongPathsEnabled = 0). Run 1's folder prefix was 176 characters before site-packages/streamlit, so pip could not write streamlit's deeply nested files and did not stop with an error.
+- Not a repository defect: the same commit in a short path (run 2) installs and runs cleanly.
+- Fix recorded in README Setup and run: on Windows, clone to a short path (or enable long paths).
+
+=============================== RUN 2 -- CLEAN ================================
+COLD RUN 2 (short path C:/Users/dsche/AppData/Local/Temp/p1c) -- started 2026-10-15T12:48:32-04:00
+--- clone
+ok, HEAD 9222448
+--- fresh venv
+ok
+--- pip install -r requirements.txt
+pip exit 0
+matplotlib==3.11.2
+numpy==2.5.4
+pandas==2.3.3
+scipy==1.18.1
+streamlit==1.66.0
+yfinance==1.7.0
+--- tests
+Ran 27 tests in 0.113s
+
+OK
+--- analysis
+exit 0
+report identical to frozen
+--- app smoke test
+app exceptions: 0 | action: WATCH/DEFER | live value: $78.83
+COLD RUN 2 -- finished 2026-10-15T12:53:23-04:00; elapsed 291 s
+
+RESULT: clean end-to-end run. Time from empty folder to visible output (frozen-report match and app showing WATCH/DEFER, $78.83): 291 s, most of it pip install.

@@ -1,0 +1,18 @@
+PROJECT: FIN 43900 Project 1 -- NVIDIA (NVDA) Corporate Finance Application
+STUDENT: Drew Scheiderer
+VIDEO: 2 Codebase Walkthrough
+STABLE VIDEO ID/URL: [YouTube Unlisted URL]
+TITLE: [descriptive title]
+DURATION: [mm:ss] (5:00 max)
+REPOSITORY COMMIT/FROZEN VERSION: [commit hash]
+
+# Required evidence moments -- replace each bracket with the corrected caption text
+# and its real timestamp. Delete these two comment lines before submitting.
+[00:00] Drew Scheiderer: [architecture: evidence -> proforma.py -> analysis.py -> tests -> visible_output.json -> app.py]
+[mm:ss] Drew Scheiderer: [data flow and key functions: run_model, _fcff, bridge, decide]
+[mm:ss] Drew Scheiderer: [finance logic: FCFF from the pro-forma, WACC, terminal value, bridge]
+[mm:ss] Drew Scheiderer: [how to reproduce: python -m unittest test_project; python analysis.py --freeze]
+[mm:ss] Drew Scheiderer: [DEMO highest-risk test: drop_sbc_equity_credit -> model refuses; gap = SBC]
+[mm:ss] Drew Scheiderer: [name one failure mode the tests do not catch]
+
+END OF CORRECTED TRANSCRIPT
