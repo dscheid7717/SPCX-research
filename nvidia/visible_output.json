@@ -1,0 +1,186 @@
+{
+  "decision": "Initiate, watch/defer, or do not initiate a long position in NVIDIA (NVDA) common stock, for a buy-side investment committee that holds no current position.",
+  "intended_user": "Buy-side investment committee; no current NVDA position",
+  "horizon": "3-5 year holding period; five-year explicit forecast FY2027E-FY2031E plus terminal value",
+  "as_of": "2026-10-14",
+  "currency_and_units": "USD; money in USD millions, per-share values in USD",
+  "share_basis": "diluted: 24,514M FY2026 diluted weighted-average shares (10-K EPS note)",
+  "sources": [
+    "NVIDIA 10-K FY2026 (period 2026-01-25, filed 2026-02-25, acc. 0001045810-26-000021)",
+    "NVIDIA 10-Q Q2 FY2027 (period 2026-07-26, filed 2026-08-26, acc. 0001045810-26-000075)",
+    "Market data: NVDA $221.30, AMD $570.82, AVGO $346.25, 10y UST 5.190%, Yahoo Finance via yfinance, close 2026-10-14",
+    "Peers: AMD 10-K acc. 0000002488-26-000018; Broadcom 10-K acc. 0001730168-25-000121 (SEC XBRL company facts)"
+  ],
+  "material_inputs": {
+    "price": 221.3,
+    "revenue_growth": [
+      0.7147,
+      0.22,
+      0.16,
+      0.11,
+      0.07
+    ],
+    "gross_margin": [
+      0.75,
+      0.735,
+      0.72,
+      0.705,
+      0.69
+    ],
+    "beta": 2.216,
+    "risk_free": 0.0519,
+    "equity_risk_premium": 0.05,
+    "cost_of_equity": 0.1627,
+    "wacc": 0.1625,
+    "terminal_growth": 0.03,
+    "bridge": {
+      "cash_and_marketable_securities": 62556.0,
+      "non_marketable_equity_securities": 22251.0,
+      "debt": 8468.0,
+      "diluted_shares": 24514.0
+    }
+  },
+  "valuation": {
+    "dcf_low_base_high_per_share": [
+      49.19,
+      78.83,
+      114.63
+    ],
+    "case_names": [
+      "AI capex digestion",
+      "Re-anchored base",
+      "Sustained build-out"
+    ],
+    "enterprise_value": 1856186.0,
+    "terminal_share_of_ev": 0.5736,
+    "fcfe_cross_check_per_share": 76.06,
+    "case_actions": [
+      "DO NOT INITIATE",
+      "WATCH/DEFER",
+      "WATCH/DEFER"
+    ],
+    "what_ifs": {
+      "Hyperscaler capex pause (downside)": {
+        "value_per_share": 66.63,
+        "action": "DO NOT INITIATE"
+      },
+      "Custom-silicon margin compression (downside)": {
+        "value_per_share": 73.75,
+        "action": "WATCH/DEFER"
+      },
+      "Stock compensation treated as a cash cost": {
+        "value_per_share": 74.16,
+        "action": "WATCH/DEFER"
+      },
+      "Blume-adjusted beta": {
+        "value_per_share": 92.89,
+        "action": "WATCH/DEFER"
+      }
+    },
+    "wacc_growth_grid_range": [
+      66.05,
+      98.91
+    ],
+    "reverse_dcf": {
+      "uniform_growth_shift_pp": 45.44,
+      "implied_beta": 0.511,
+      "implied_cost_of_equity": 0.0774
+    },
+    "comparables": {
+      "NVDA": {
+        "ev_ebitda": 40.3,
+        "pe": 45.2
+      },
+      "AMD": {
+        "ev_ebitda": 138.3,
+        "pe": 215.4
+      },
+      "AVGO": {
+        "ev_ebitda": 50.7,
+        "pe": 72.6
+      }
+    },
+    "nvda_implied_from_peers_per_share": {
+      "AMD": {
+        "from_ev_ebitda": 754.01,
+        "from_pe": 1055.48
+      },
+      "AVGO": {
+        "from_ev_ebitda": 277.66,
+        "from_pe": 355.69
+      }
+    }
+  },
+  "recommendation": {
+    "action": "WATCH/DEFER",
+    "reason": "price $221.30 above DCF value $78.83, but NVDA trades below every admitted peer on EV/EBITDA and the earnings behind that multiple persist in this scenario",
+    "range_per_share": "$49-$115 (DCF low-high); base $79",
+    "conditions": [
+      "Watch holds only while NVDA's trailing EV/EBITDA stays below every admitted peer's and the evidence keeps EBITDA growing.",
+      "Initiate condition: price at or below the base-case DCF value.",
+      "Downside evidence that flips the action: a reported quarter showing year-over-year revenue decline or gross margin below 70% moves the evidence toward the AI-capex-digestion case, where the rule gives DO NOT INITIATE."
+    ]
+  },
+  "reversal_trigger": "INITIATE if NVDA closes at or below the base-case value per share. DO NOT INITIATE if a 10-Q shows year-over-year revenue decline (the low-case path), or if NVDA's trailing EV/EBITDA rises to or above the lowest admitted peer's. Review at each 10-Q; next due for Q3 FY2027 (quarter ending late October 2026).",
+  "checks": [
+    {
+      "check": "Base year reconciles to the 10-K",
+      "passed": true
+    },
+    {
+      "check": "Base revenue equals filed FY2026 revenue",
+      "passed": true
+    },
+    {
+      "check": "Balance sheet balances every year",
+      "passed": true
+    },
+    {
+      "check": "Cash flow ties to balance-sheet cash",
+      "passed": true
+    },
+    {
+      "check": "Cash never below the minimum",
+      "passed": true
+    },
+    {
+      "check": "FCFF reconciles to the pro-forma's FCFE",
+      "passed": true
+    },
+    {
+      "check": "Terminal growth below WACC",
+      "passed": true
+    },
+    {
+      "check": "Enterprise-to-equity bridge reconciles",
+      "passed": true
+    },
+    {
+      "check": "Every company carries every field of the one definition",
+      "passed": true
+    },
+    {
+      "check": "Peer fiscal years end within 120 days of NVIDIA's",
+      "passed": true
+    },
+    {
+      "check": "Positive EBITDA and EPS for every admitted company",
+      "passed": true
+    },
+    {
+      "check": "EV/EBITDA recomputes from its parts for every company",
+      "passed": true
+    },
+    {
+      "check": "DCF grid monotonic (value falls with WACC, rises with g)",
+      "passed": true
+    }
+  ],
+  "all_checks_passed": true,
+  "limitations": [
+    "The forecast opens on the FY2026 (Jan 2026) balance sheet and discounts from that date; the price is October 2026. Debt rose to 33,366 and distributions continued in between.",
+    "WACC rests almost entirely on beta; the raw-to-Blume swing is about 200bp.",
+    "Two peers only; trailing multiples lag NVIDIA's growth.",
+    "Scenario endpoints are judgments, not probabilities."
+  ]
+}

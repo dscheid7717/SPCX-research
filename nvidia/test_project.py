@@ -67,25 +67,25 @@ class ArticulationTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.run = analysis.run_model()
+        cls.model_run = analysis.run_model()
 
     def _check(self, name):
-        return next(c for c in self.run["checks"] if c["check"] == name)
+        return next(c for c in self.model_run["checks"] if c["check"] == name)
 
     def test_model_is_valid(self):
-        self.assertTrue(self.run["valid"], [c for c in self.run["checks"] if not c["passed"]])
+        self.assertTrue(self.model_run["valid"], [c for c in self.model_run["checks"] if not c["passed"]])
 
     def test_base_year_reconciles(self):
         self.assertTrue(self._check("Base year reconciles to the 10-K")["passed"])
         self.assertTrue(self._check("Base revenue equals filed FY2026 revenue")["passed"])
 
     def test_balance_sheet_balances_every_year(self):
-        for year in self.run["projection"]:
+        for year in self.model_run["projection"]:
             self.assertAlmostEqual(year["balance_gap"], 0.0, delta=analysis.TOLERANCE,
                                    msg=year["label"])
 
     def test_cash_flow_ties_to_balance_sheet_cash(self):
-        for row in self.run["cash_flows"]:
+        for row in self.model_run["cash_flows"]:
             self.assertAlmostEqual(row["tie_gap"], 0.0, delta=analysis.TOLERANCE,
                                    msg=row["label"])
 

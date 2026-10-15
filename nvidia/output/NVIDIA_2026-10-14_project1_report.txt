@@ -1,0 +1,78 @@
+==============================================================================
+PROJECT 1 -- NVIDIA (NVDA) -- valuation range and committee action
+==============================================================================
+Decision: Initiate, watch/defer, or do not initiate a long position in NVIDIA (NVDA) common stock, for a buy-side investment committee that holds no current position.
+As of 2026-10-14. USD; money in USD millions, per-share values in USD. Share basis: diluted: 24,514M FY2026 diluted weighted-average shares (10-K EPS note).
+Price $221.30 (2026-10-14, Yahoo Finance via yfinance, daily close)
+
+CHECKS (a failure stops the valuation)
+  [PASS] Base year reconciles to the 10-K: assets 206,803 = filed 206,803; liabilities 49,510 = filed 49,510
+  [PASS] Base revenue equals filed FY2026 revenue: 215,938 vs 215,938
+  [PASS] Balance sheet balances every year: largest |assets - liabilities - equity| = 0.00
+  [PASS] Cash flow ties to balance-sheet cash: largest |CFS ending cash - BS cash| = 0.00
+  [PASS] Cash never below the minimum: lowest cash 62,556 vs minimum 10,000
+  [PASS] FCFF reconciles to the pro-forma's FCFE: largest gap 0.0000
+  [PASS] Terminal growth below WACC: g 3.00% vs WACC 16.25%
+  [PASS] Enterprise-to-equity bridge reconciles: EV 1,856,186 + cash/securities 62,556 + equity stakes 22,251 - debt 8,468 = 1,932,525
+  [PASS] Every company carries every field of the one definition: fields: price, fiscal_end, revenue, operating_income, d_and_a, eps, diluted_shares, cash_and_st_investments, debt, source
+  [PASS] Peer fiscal years end within 120 days of NVIDIA's: AMD 2025-12-27, AVGO 2025-11-02
+  [PASS] Positive EBITDA and EPS for every admitted company: a negative multiple is excluded, not averaged
+  [PASS] EV/EBITDA recomputes from its parts for every company: EV = price x diluted shares + debt - cash and short-term investments
+  [PASS] DCF grid monotonic (value falls with WACC, rises with g): checked over the 5 x 5 grid
+
+PRO-FORMA (USD millions)
+                                  FY2027E      FY2028E      FY2029E      FY2030E      FY2031E
+  Revenue                       370,279.0    451,740.4    524,018.8    581,660.9    622,377.2
+  Gross profit                  277,709.2    332,029.2    377,293.6    410,070.9    429,440.3
+  Operating income              239,685.9    278,070.2    306,498.5    327,660.4    337,304.6
+  Net income                    203,403.9    235,672.4    259,577.8    277,379.6    285,506.4
+  Cash (BS)                      62,556.0     62,556.0     62,556.0     62,556.0     62,556.0
+  Total assets                  226,996.9    243,902.7    260,102.0    274,529.6    286,467.9
+  Equity                        177,167.5    193,883.4    209,898.3    224,235.8    236,238.2
+  Balance gap                         0.0         -0.0          0.0          0.0         -0.0
+  FCFE                          194,479.8    232,315.9    259,059.9    280,243.7    291,909.8
+  FCFF                          193,412.1    231,222.5    257,940.7    279,098.9    290,739.2
+  CFS ending cash                62,556.0     62,556.0     62,556.0     62,556.0     62,556.0
+
+FCFF DCF (base)
+  Cost of equity 16.27%   WACC 16.25%   terminal growth 3.00%
+  PV explicit 791,457 + PV terminal 1,064,729 = EV 1,856,186  (terminal share 57.4%)
+  EV + cash/securities 62,556 + equity stakes 22,251 - debt 8,468 = equity 1,932,525
+  / 24,514M diluted shares = $78.83   (FCFE cross-check $76.06)
+
+CASES (causal)
+  low   AI capex digestion         $    49.19  WACC 16.25%  -> DO NOT INITIATE
+        Hyperscalers pause after FY2027: H2 FY2027 only matches H1, FY2028 revenue falls 10%, and custom silicon takes share so gross margin fades to 65%.
+  base  Re-anchored base           $    78.83  WACC 16.25%  -> WATCH/DEFER
+        Reported H1 FY2027 plus a flat H2 run rate, then the Lab 10 decay path; gross margin fades from 75% to 69%.
+  high  Sustained build-out        $   114.63  WACC 14.25%  -> WATCH/DEFER
+        Demand broadens beyond hyperscalers: FY2027 +80%, then 30/20/12/7%; pricing power holds gross margin at 74%; as revenue diversifies the Blume-adjusted beta (1.815) is the better risk estimate.
+
+WHAT-IFS (each off base) and the action the rule gives under each
+  Hyperscaler capex pause (downside)             $    66.63  -> DO NOT INITIATE
+  Custom-silicon margin compression (downside)   $    73.75  -> WATCH/DEFER
+  Stock compensation treated as a cash cost      $    74.16  -> WATCH/DEFER
+  Blume-adjusted beta                            $    92.89  -> WATCH/DEFER
+
+WACC x TERMINAL GROWTH (value per share, $)
+  WACC \ g       2.0%      2.5%      3.0%      3.5%      4.0%
+    14.25%      87.82     90.24     92.87     95.75     98.91
+    15.25%      81.13     83.12     85.28     87.61     90.16
+    16.25%      75.39     77.05     78.83     80.76     82.84
+    17.25%      70.41     71.81     73.30     74.90     76.63
+    18.25%      66.05     67.24     68.50     69.85     71.29
+
+REVERSE DCF -- what the price assumes
+  Uniform growth shift +45.44pp: path 71.5% / 67.4% / 61.4% / 56.4% / 52.4%; FY2031E revenue 2,387,051
+  Or beta 0.511 (cost of equity 7.74%) with the base operating forecast
+  Held fixed: FY2027E growth (half reported), margins, cost ratios, capex intensity, terminal growth 3%, the bridge; beta for the growth solve and growth for the beta solve. One consistent assumption set, not proof of mispricing.
+
+COMPARABLES (policy fixed before computing; one definition, one price date)
+  NVDA  EV    5,370,860  EBITDA    133,230  EV/EBITDA   40.3x  P/E   45.2x  EBITDA margin 61.7%
+  AMD   EV      926,532  EBITDA      6,698  EV/EBITDA  138.3x  P/E  215.4x  EBITDA margin 19.3%
+  AVGO  EV    1,729,309  EBITDA     34,120  EV/EBITDA   50.7x  P/E   72.6x  EBITDA margin 53.4%
+  Peer median EV/EBITDA 94.5x; lowest peer 50.7x; NVDA below every peer: True
+  NVDA at AMD's multiples: EV/EBITDA $754.01   P/E $1,055.48
+  NVDA at AVGO's multiples: EV/EBITDA $277.66   P/E $355.69
+
+COMMITTEE ACTION: WATCH/DEFER -- price $221.30 above DCF value $78.83, but NVDA trades below every admitted peer on EV/EBITDA and the earnings behind that multiple persist in this scenario

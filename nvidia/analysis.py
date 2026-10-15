@@ -400,14 +400,22 @@ PEER_TICKERS = ["AMD", "AVGO"]
 PEER_FISCAL_WINDOW_DAYS = 120
 
 # ---------------------------------------------------------------------------
-# DECISION RULE -- written before the Edition B numbers were read
+# DECISION RULE -- applied to every case and what-if, not only the base
 # ---------------------------------------------------------------------------
-# Absolute value (the DCF range) decides; relative value (the comps) can only hold a name on
-# watch, never initiate it. That is the Lab 08 reasoning written down as a rule.
-#   INITIATE         price <= base-case DCF value
-#   WATCH/DEFER      price above base but <= high-case DCF value, OR
-#                    price above high case while NVDA trades BELOW the peer median EV/EBITDA
-#   DO NOT INITIATE  price above high case and NVDA at or above the peer median EV/EBITDA
+# Absolute value (the DCF) decides; relative value (the comps) can only hold a name on watch,
+# never initiate it. That is the Lab 08 reasoning written down as a rule:
+#   INITIATE         price <= the scenario's DCF value per share
+#   WATCH/DEFER      price above it, BUT relative value supports waiting: NVDA's trailing
+#                    EV/EBITDA is below EVERY admitted peer's AND the scenario's EBITDA never
+#                    falls year over year
+#   DO NOT INITIATE  otherwise
+# Why the earnings-persistence leg: a low trailing multiple only means "cheap" if the earnings
+# it is measured on persist. In a scenario where EBITDA falls, the trailing multiple overstates
+# the discount and stops being evidence for waiting.
+# Revision record: the first-run rule (commit 93a7ac9) held the name on watch whenever NVDA was
+# below the peer MEDIAN, with no persistence leg. Its first run showed no downside case could
+# ever alter the action, which fails the project's requirement that one could -- so the rule
+# was revised after that run, and the revision is disclosed in docs/validation-and-ai-use.md.
 GRID_WACC_STEPS = [-0.02, -0.01, 0.0, 0.01, 0.02]
 GRID_TERMINAL_GROWTH = [0.020, 0.025, 0.030, 0.035, 0.040]
 TOLERANCE = 0.05      # USD millions, for every accounting check
@@ -713,10 +721,14 @@ def reverse_dcf(inputs=None):
     inputs = base_inputs() if inputs is None else inputs
     price = inputs["price"]
 
+    # FY2027E is held fixed: half of it is already reported, so the market's expectation can
+    # only sit in FY2028E-FY2031E.
+    def shifted_path(shift):
+        path = list(inputs["revenue_growth"])
+        return path[:1] + [rate + shift for rate in path[1:]]
+
     def value_at_shift(shift):
-        shifted = apply_overrides(inputs, {
-            "revenue_growth": [rate + shift for rate in inputs["revenue_growth"]]})
-        return value_per_share(shifted)
+        return value_per_share(apply_overrides(inputs, {"revenue_growth": shifted_path(shift)}))
 
     shift = _bisect(value_at_shift, -0.30, 1.50, price)
 
@@ -726,8 +738,7 @@ def reverse_dcf(inputs=None):
     implied_beta = _bisect(value_at_beta, 0.05, 4.0, price)
     implied_ke = (None if implied_beta is None else
                   cost_of_equity(apply_overrides(inputs, {"beta": implied_beta})))
-    implied_path = (None if shift is None else
-                    [rate + shift for rate in inputs["revenue_growth"]])
+    implied_path = None if shift is None else shifted_path(shift)
     implied_fy2031_revenue = None
     if implied_path:
         revenue = FY2026_REVENUE
@@ -741,8 +752,9 @@ def reverse_dcf(inputs=None):
         "implied_fy2031_revenue": implied_fy2031_revenue,
         "implied_beta": implied_beta,
         "implied_cost_of_equity": implied_ke,
-        "held_fixed": "margins, cost ratios, capex intensity, terminal growth 3%, the bridge; "
-                      "beta for the growth solve and growth for the beta solve",
+        "held_fixed": "FY2027E growth (half reported), margins, cost ratios, capex intensity, "
+                      "terminal growth 3%, the bridge; beta for the growth solve and growth "
+                      "for the beta solve",
     }
 
 
@@ -783,6 +795,7 @@ def comparables():
     peer_ev = sorted(rows[t]["ev_ebitda"] for t in PEER_TICKERS)
     peer_median_ev_ebitda = (peer_ev[len(peer_ev) // 2] if len(peer_ev) % 2 else
                              (peer_ev[len(peer_ev) // 2 - 1] + peer_ev[len(peer_ev) // 2]) / 2)
+    lowest_peer_ev_ebitda = peer_ev[0]
 
     required = ("price", "fiscal_end", "revenue", "operating_income", "d_and_a", "eps",
                 "diluted_shares", "cash_and_st_investments", "debt", "source")
@@ -805,53 +818,65 @@ def comparables():
     return {
         "policy": PEER_POLICY, "rows": rows, "implied_nvda_value": implied,
         "peer_median_ev_ebitda": peer_median_ev_ebitda,
-        "nvda_below_peer_median": rows[TARGET_TICKER]["ev_ebitda"] < peer_median_ev_ebitda,
+        "lowest_peer_ev_ebitda": lowest_peer_ev_ebitda,
+        "nvda_below_every_peer": rows[TARGET_TICKER]["ev_ebitda"] < lowest_peer_ev_ebitda,
         "checks": policy_checks,
     }
 
 
-def decide(price, low, base, high, nvda_below_peer_median):
-    """Apply the written decision rule. Returns (action, reason)."""
-    if price <= base:
-        return "INITIATE", f"price ${price:,.2f} at or below base-case value ${base:,.2f}"
-    if price <= high:
-        return ("WATCH/DEFER", f"price ${price:,.2f} above base ${base:,.2f} but inside the "
-                               f"high case ${high:,.2f}")
-    if nvda_below_peer_median:
-        return ("WATCH/DEFER", f"price ${price:,.2f} above even the high case ${high:,.2f}, "
-                               "but NVDA trades below its peer median EV/EBITDA, so relative "
-                               "value does not confirm overvaluation")
-    return ("DO NOT INITIATE", f"price ${price:,.2f} above the high case ${high:,.2f} and NVDA "
-                               "is not cheap against peers")
+def ebitda_persists(run):
+    """True if the scenario's EBITDA never falls -- FY2026 actual through FY2031E."""
+    actual = COMPANIES[TARGET_TICKER]["operating_income"] + COMPANIES[TARGET_TICKER]["d_and_a"]
+    path = [actual] + [y["operating_income"] + y["depreciation"] for y in run["projection"]]
+    return all(b >= a for a, b in zip(path, path[1:]))
+
+
+def decide(price, value, nvda_below_every_peer, earnings_persist):
+    """Apply the written decision rule to one scenario. Returns (action, reason)."""
+    if price <= value:
+        return "INITIATE", f"price ${price:,.2f} at or below DCF value ${value:,.2f}"
+    if nvda_below_every_peer and earnings_persist:
+        return ("WATCH/DEFER", f"price ${price:,.2f} above DCF value ${value:,.2f}, but NVDA "
+                               "trades below every admitted peer on EV/EBITDA and the "
+                               "earnings behind that multiple persist in this scenario")
+    if not earnings_persist:
+        return ("DO NOT INITIATE", f"price ${price:,.2f} above DCF value ${value:,.2f}, and "
+                                   "EBITDA falls in this scenario, so the low trailing multiple "
+                                   "overstates the discount")
+    return ("DO NOT INITIATE", f"price ${price:,.2f} above DCF value ${value:,.2f} and NVDA is "
+                               "not cheap against peers")
 
 
 def run_analysis(inputs=None):
     """Every material Project 1 result, from one call. The app and the freeze both use this."""
     inputs = base_inputs() if inputs is None else inputs
     base_run = run_model(inputs)
-    cases = {}
-    for key, case in CASES.items():
-        run = run_model(apply_overrides(inputs, case["overrides"]))
-        cases[key] = {"name": case["name"], "story": case["story"], "valid": run["valid"],
-                      "value_per_share": run["valuation"]["value_per_share"] if run["valid"] else None,
-                      "wacc": run["wacc"],
-                      "fy2031_revenue": run["projection"][-1]["revenue"] if run.get("projection") else None}
-    what_ifs = {}
-    for key, case in WHAT_IFS.items():
-        run = run_model(apply_overrides(inputs, case["overrides"]))
-        what_ifs[key] = {"name": case["name"], "story": case["story"], "valid": run["valid"],
-                         "value_per_share": run["valuation"]["value_per_share"] if run["valid"] else None}
     comps = comparables()
+
+    def scenario(definition):
+        run = run_model(apply_overrides(inputs, definition["overrides"]))
+        entry = {"name": definition["name"], "story": definition["story"],
+                 "valid": run["valid"], "wacc": run["wacc"], "value_per_share": None,
+                 "action": "REFUSED -- a check failed", "reason": None,
+                 "earnings_persist": None}
+        if run["valid"]:
+            value = run["valuation"]["value_per_share"]
+            persist = ebitda_persists(run)
+            action, reason = decide(inputs["price"], value, comps["nvda_below_every_peer"],
+                                    persist)
+            entry.update(value_per_share=value, action=action, reason=reason,
+                         earnings_persist=persist,
+                         fy2031_revenue=run["projection"][-1]["revenue"])
+        return entry
+
+    cases = {key: scenario(case) for key, case in CASES.items()}
+    what_ifs = {key: scenario(case) for key, case in WHAT_IFS.items()}
     grid = sensitivity_grid(inputs) if base_run["valid"] else None
     reverse = reverse_dcf(inputs) if base_run["valid"] else None
 
     decision = None
-    if all(cases[k]["valid"] for k in cases):
-        action, reason = decide(inputs["price"], cases["low"]["value_per_share"],
-                                cases["base"]["value_per_share"],
-                                cases["high"]["value_per_share"],
-                                comps["nvda_below_peer_median"])
-        decision = {"action": action, "reason": reason}
+    if cases["base"]["valid"]:
+        decision = {"action": cases["base"]["action"], "reason": cases["base"]["reason"]}
 
     checks = list(base_run["checks"]) + comps["checks"]
     if grid:
@@ -904,8 +929,10 @@ def visible_output(results):
             "enterprise_value": round(base["valuation"]["enterprise_value"], 0),
             "terminal_share_of_ev": round(base["valuation"]["terminal_share_of_ev"], 4),
             "fcfe_cross_check_per_share": round(base["valuation"]["fcfe_value_per_share"], 2),
-            "what_ifs_per_share": {v["name"]: round(v["value_per_share"], 2)
-                                   for v in results["what_ifs"].values()},
+            "case_actions": [cases[k]["action"] for k in ("low", "base", "high")],
+            "what_ifs": {v["name"]: {"value_per_share": round(v["value_per_share"], 2),
+                                     "action": v["action"]}
+                         for v in results["what_ifs"].values()},
             "wacc_growth_grid_range": [
                 round(min(v for row in results["grid"]["values"] for v in row if v), 2),
                 round(max(v for row in results["grid"]["values"] for v in row if v), 2)],
@@ -929,17 +956,19 @@ def visible_output(results):
             "reason": results["decision"]["reason"],
             "range_per_share": f"${low:,.0f}-${high:,.0f} (DCF low-high); base ${mid:,.0f}",
             "conditions": [
-                "Revisit if NVDA trades below the base-case value (initiate condition).",
-                "Revisit if the Q3 FY2027 10-Q shows revenue below 90,000 or gross margin "
-                "below 70% (downside evidence).",
-                "Revisit if NVDA's EV/EBITDA rises to or above the peer median (relative "
-                "value no longer supports holding on watch).",
+                "Watch holds only while NVDA's trailing EV/EBITDA stays below every admitted "
+                "peer's and the evidence keeps EBITDA growing.",
+                "Initiate condition: price at or below the base-case DCF value.",
+                "Downside evidence that flips the action: a reported quarter showing "
+                "year-over-year revenue decline or gross margin below 70% moves the evidence "
+                "toward the AI-capex-digestion case, where the rule gives DO NOT INITIATE.",
             ],
         },
         "reversal_trigger": (
-            "Move to INITIATE if price falls to or below the base-case value per share; move "
-            "to DO NOT INITIATE if NVDA's trailing EV/EBITDA reaches the peer median while the "
-            "price remains above the high case."),
+            "INITIATE if NVDA closes at or below the base-case value per share. DO NOT "
+            "INITIATE if a 10-Q shows year-over-year revenue decline (the low-case path), or "
+            "if NVDA's trailing EV/EBITDA rises to or above the lowest admitted peer's. "
+            "Review at each 10-Q; next due for Q3 FY2027 (quarter ending late October 2026)."),
         "checks": [{"check": c["check"], "passed": c["passed"]} for c in results["checks"]],
         "all_checks_passed": results["all_checks_passed"],
         "limitations": [
@@ -1001,12 +1030,13 @@ def report(results):
     add("CASES (causal)")
     for key in ("low", "base", "high"):
         c = results["cases"][key]
-        add(f"  {key:<5} {c['name']:<26} ${_fmt(c['value_per_share']):>9}  WACC {c['wacc']:.2%}")
+        add(f"  {key:<5} {c['name']:<26} ${_fmt(c['value_per_share']):>9}  WACC {c['wacc']:.2%}"
+            f"  -> {c['action']}")
         add(f"        {c['story']}")
     add("")
-    add("WHAT-IFS (each off base)")
+    add("WHAT-IFS (each off base) and the action the rule gives under each")
     for c in results["what_ifs"].values():
-        add(f"  {c['name']:<46} ${_fmt(c['value_per_share']):>9}")
+        add(f"  {c['name']:<46} ${_fmt(c['value_per_share']):>9}  -> {c['action']}")
     add("")
     grid = results["grid"]
     add("WACC x TERMINAL GROWTH (value per share, $)")
@@ -1031,8 +1061,9 @@ def report(results):
         add(f"  {t:<5} EV {row['enterprise_value']:>12,.0f}  EBITDA {row['ebitda']:>10,.0f}  "
             f"EV/EBITDA {row['ev_ebitda']:>6.1f}x  P/E {row['pe']:>6.1f}x  "
             f"EBITDA margin {row['ebitda_margin']:.1%}")
-    add(f"  Peer median EV/EBITDA {comps['peer_median_ev_ebitda']:.1f}x; NVDA below median: "
-        f"{comps['nvda_below_peer_median']}")
+    add(f"  Peer median EV/EBITDA {comps['peer_median_ev_ebitda']:.1f}x; lowest peer "
+        f"{comps['lowest_peer_ev_ebitda']:.1f}x; NVDA below every peer: "
+        f"{comps['nvda_below_every_peer']}")
     for t, d in comps["implied_nvda_value"].items():
         add(f"  NVDA at {t}'s multiples: EV/EBITDA ${d['from_ev_ebitda']:,.2f}   "
             f"P/E ${d['from_pe']:,.2f}")
