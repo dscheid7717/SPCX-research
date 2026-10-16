@@ -7,7 +7,7 @@
 
 ## Edition A — unchanged Brightspace baseline
 
-**Brightspace submission:** Project 1 — Edition A Checkpoint (Lab 03, Week 2) · **Receipt ID:** [enter from Brightspace] · **Submitted:** September 1, 2026, between 4:30 and 5:45 p.m. ET (exact time not recorded)
+**Brightspace submission:** Lab 03 — Project 1 Valuation Edition A (Week 2) · **Attempt:** 1 of 3 (the only attempt; first successful receipt) · **Written:** Sep 1, 2026, 4:53 p.m. – 5:47 p.m. ET (submitted 5:47 p.m.) · **Score:** 25 / 25
 **Git corroboration:** uploaded to the repository in commit `2808698` (2026-09-03 17:37 ET), after the Brightspace submission; unchanged since.
 **Repository copy:** `spacex/Project_1_Edition_A.md` — never edited after submission.
 
