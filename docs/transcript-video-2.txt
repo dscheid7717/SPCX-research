@@ -1,18 +1,41 @@
 PROJECT: FIN 43900 Project 1 -- NVIDIA (NVDA) Corporate Finance Application
 STUDENT: Drew Scheiderer
 VIDEO: 2 Codebase Walkthrough
-STABLE VIDEO ID/URL: [YouTube Unlisted URL]
-TITLE: [descriptive title]
-DURATION: [mm:ss] (5:00 max)
-REPOSITORY COMMIT/FROZEN VERSION: [commit hash]
+STABLE VIDEO ID/URL: https://youtu.be/R9VS2uOiBT4 (YouTube ID R9VS2uOiBT4, Unlisted)
+TITLE: FIN 43900 Project 1 – Video 2: Codebase Walkthrough and Validation (NVIDIA) – Drew Scheiderer
+DURATION: 5:01 as reported by YouTube (export 5:00). All required elements end by 4:53.
+REPOSITORY COMMIT/FROZEN VERSION: 9598140
 
-# Required evidence moments -- replace each bracket with the corrected caption text
-# and its real timestamp. Delete these two comment lines before submitting.
-[00:00] Drew Scheiderer: [architecture: evidence -> proforma.py -> analysis.py -> tests -> visible_output.json -> app.py]
-[mm:ss] Drew Scheiderer: [data flow and key functions: run_model, _fcff, bridge, decide]
-[mm:ss] Drew Scheiderer: [finance logic: FCFF from the pro-forma, WACC, terminal value, bridge]
-[mm:ss] Drew Scheiderer: [how to reproduce: python -m unittest test_project; python analysis.py --freeze]
-[mm:ss] Drew Scheiderer: [DEMO highest-risk test: drop_sbc_equity_credit -> model refuses; gap = SBC]
-[mm:ss] Drew Scheiderer: [name one failure mode the tests do not catch]
+Corrected from YouTube automatic captions: names, tickers, finance terms, code names and numbers
+corrected; harmless repeats and filler left as spoken. Bracketed text is a clarification, not
+speech.
+
+[00:00] Drew Scheiderer: I'm Drew Scheiderer. This is coursework for FIN 43900: education, not investment advice. I used AI tools, Claude Code and ChatGPT, and every use is disclosed in my AI-use record.
+
+[00:11] Drew Scheiderer: [Architecture] This is the codebase walkthrough for my NVIDIA valuation. The architecture is in one direction: evidence, then analysis, then tests, then a frozen output, and finally the app. Everything lives in the nvidia folder, and the app never calculates the answer itself. It only shows what the analysis produced.
+
+[00:29] Drew Scheiderer: [Data flow: the pro-forma, nvidia/proforma.py] The foundation is my Lab 10 three-statement pro-forma. It opens NVIDIA's fiscal 2026 balance sheet from the 10-K. A check proves it matches the filed totals: 206,803 million of assets and 49,510 of liabilities. project_year builds each year in a fixed order: the income statement first, then every balance-sheet line except cash, and cash last. Cash is never plugged, which is why the balance check can actually fail.
+
+[01:04] Drew Scheiderer: [Key file: nvidia/analysis.py, BASE_INPUTS and DRIVER_RECORD] analysis.py is the Project 1 engine. It drives the pro-forma without editing it, so my Lab 10 record stays intact. These are my Edition B drivers. Fiscal 2027 growth is 71.5%: the first half reported in the 10-Q, plus the second half at the Q2 run rate. The later years keep my Lab 10 path of 22, 16, 11 and 7%. Each load-bearing driver has a record: its value, its basis, the challenge to it, and the evidence that would change it.
+
+[01:36] Drew Scheiderer: [Financial logic: _fcff] The finance logic starts here. Free cash flow to the firm is operating income after tax, plus depreciation and stock compensation, minus capex and the investment in working capital.
+
+[01:47] Drew Scheiderer: [Discounting and WACC: run_model] Those five years of cash flow are discounted at WACC using my Lab 06 DCF functions, the same ones that reproduce the course's twelve training answers. Cost of equity is the 5.19% Treasury yield plus my beta of 2.216 times a 5% premium: about 16.3%. NVIDIA has almost no debt, so the WACC is essentially the cost of equity.
+
+[02:08] Drew Scheiderer: [Enterprise-to-equity bridge] Then the bridge: enterprise value of 1.86 trillion, plus cash and securities, plus non-marketable equity stakes, minus debt, divided by 24.5 billion diluted shares. That's $78.83 per share.
+
+[02:28] Drew Scheiderer: [Checks in run_model] Before any value comes out, run_model runs these checks. The base year matches the filing. The balance sheet balances every year. The cash flow statement ties to balance-sheet cash. Free cash flow to the firm reconciles to free cash flow to equity. Terminal growth is below WACC. And finally, the bridge adds up. If any check fails, the function returns no number at all.
+
+[02:56] Drew Scheiderer: [Decision rule: decide] The decision rule: initiate only if price is at or below the DCF value. Otherwise, it's watch/defer only if NVIDIA is cheaper than every peer on EV-to-EBITDA, its EBITDA keeps growing, and the gross margin stays above my 67% floor. If any of those fail, the call is do not initiate.
+
+[03:14] Drew Scheiderer: [How to reproduce: README "Setup and run"] To reproduce from scratch: create a virtual environment, install requirements.txt, then from the nvidia folder, run the tests and python analysis.py --freeze. On Windows, clone to a short path. My cold-run log shows a long folder path breaks the streamlit install.
+
+[03:36] Drew Scheiderer: [Visible output: nvidia/output/NVIDIA_2026-10-14_project1_report.txt] The frozen report is the visible output: every check, the statements, the valuation, and the decision, readable without running anything.
+
+[03:46] Drew Scheiderer: [Highest-risk test, run live: python -m unittest test_project.HighestRiskFailureTests -v] Now, the test aimed at my highest-risk claim: the model never values a broken balance sheet. Four tests, all OK.
+
+[03:57] Drew Scheiderer: [test_dropped_sbc_equity_credit_refuses] Here's the main one. Stock compensation has to be booked twice: added back in cash flow because no cash moved, and credited to equity because it's paid in shares. This test injects the realistic error: the equity credit is dropped. It then requires two things. First, the model refuses to value: valid is false and there's no valuation. Second, the balance gap equals that year's stock compensation exactly, which in fiscal 2027 is 10,950 million. That's how I know the check is catching the real error, not just rounding-off noise. The next test confirms the fault doesn't leak into the following run.
+
+[04:38] Drew Scheiderer: [Failure mode the tests cannot catch] One failure mode these tests can't catch is a stale assumption. My Lab 10 model passed every accounting check with 30% fiscal 2027 growth, while the 10-Q already showed revenue up 96%. Balanced books don't prove the inputs are right. That's why every driver records the evidence that would change it, and why I recheck the model at every 10-Q.
 
 END OF CORRECTED TRANSCRIPT
