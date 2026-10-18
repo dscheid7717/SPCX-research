@@ -1,18 +1,36 @@
 PROJECT: FIN 43900 Project 1 -- NVIDIA (NVDA) Corporate Finance Application
 STUDENT: Drew Scheiderer
 VIDEO: 1 Research Evolution
-STABLE VIDEO ID/URL: [YouTube Unlisted URL]
-TITLE: [descriptive title]
-DURATION: [mm:ss] (3:00 max)
-REPOSITORY COMMIT/FROZEN VERSION: [commit hash]
+STABLE VIDEO ID/URL: https://youtu.be/llsTYaLOpgk (YouTube ID llsTYaLOpgk, Unlisted)
+TITLE: FIN 43900 Project 1 – Video 1: Research Evolution (NVIDIA, Edition A to B) – Drew Scheiderer
+DURATION: 3:01 as reported by YouTube (export 3:00). All required elements end by 2:58.
+REPOSITORY COMMIT/FROZEN VERSION: 55ca324
 
-# Required evidence moments -- replace each bracket with the corrected caption text
-# and its real timestamp. Delete these two comment lines before submitting.
-[00:00] Drew Scheiderer: [Edition A thesis -- SPCX, WATCH-DEFER, 2026-09-01]
-[mm:ss] Drew Scheiderer: [why the company changed to NVIDIA -- course instruction]
-[mm:ss] Drew Scheiderer: [Edition B thesis -- NVDA WATCH/DEFER, $49-$115, base $79]
-[mm:ss] Drew Scheiderer: [what drove the change: course / own analysis / peer (Colin) / AI]
-[mm:ss] Drew Scheiderer: [ONE AI CLAIM, THE CHECK, THE VERDICT -- e.g. XBRL 39,520 vs 10-K 51,951, rejected]
-[mm:ss] Drew Scheiderer: [why the evidence was enough]
+Corrected from YouTube automatic captions: names, tickers, finance terms and numbers corrected;
+filler words left as spoken. Bracketed text is a clarification, not speech.
+
+[00:00] Drew Scheiderer: I'm Drew Scheiderer. This is my coursework for FIN 43900: education, not investment advice. I use AI tools, Claude Code and ChatGPT, and every use is disclosed in my AI record.
+
+[00:10] Drew Scheiderer: This video covers how my Project 1 research changed from Edition A to Edition B.
+
+[00:14] Drew Scheiderer: [Edition A] I wrote Edition A on September 1st with no AI. It's my Lab 03 checkpoint. It was on SpaceX, and my call was watch–defer. The business looked strong, but I couldn't test value yet. I had no verified price, no diluted share count, and no normalized free cash flow.
+
+[00:33] Drew Scheiderer: [Change driver: course instruction] The first change was the company, and that came from the course instruction. The instructor directed us to a company with an established published beta. SpaceX only listed in June, and it doesn't have a trading history for one. So, I moved to NVIDIA. Edition A stays exactly how I submitted it, and this addendum records the switch.
+
+[00:50] Drew Scheiderer: [Edition B] Edition B is still watch–defer, but for a different reason. Edition A deferred because value couldn't be tested. Edition B defers because I tested it and the methods disagree. My DCF range is $49 to $115, with a base of $79, and the stock is at $221. On EV-to-EBITDA, though, NVIDIA is the cheapest of its peers: 40 times, against Broadcom at 51 and AMD at 138.
+
+[01:17] Drew Scheiderer: [Change driver: own analysis] My own lab work drove the method. Lab 08 moved me from do not initiate to watch–defer when I found NVIDIA had the lowest multiple in its peer group.
+
+[01:26] Drew Scheiderer: [Change driver: peer challenge] A peer challenge mattered too. In Lab 12, Colin asked me how I chose my beta, and that pointed me to the real issue. The price only works with a beta around 0.5, and mine is 2.2.
+
+[01:38] Drew Scheiderer: [Most consequential change: own analysis plus AI] The most consequential change to the numbers came from my own analysis plus AI. AI flagged that the August 10-Q contradicted my 30% growth assumption for fiscal 2027, because first-half revenue was up 96%. I checked that the quarters add up and re-anchored it, which moved my base value from $58 to $79. The decision held, however, because even my high case of $115 is far below the $221 price.
+
+[02:08] Drew Scheiderer: [AI claim] Here's one AI claim and how I checked it. When AI pulled NVIDIA's data from the SEC's XBRL feed, it gave me 39.5 billion for marketable securities. That figure feeds my enterprise-to-equity bridge, so I checked it against the actual 10-K.
+
+[02:23] Drew Scheiderer: [Check against the filing] Here in the balance sheet on row 17 [workbook BALANCE_SHEET, line "Marketable securities"; shown as row 18 in Excel], it says 51,951 million. The XBRL figure was a note total for debt securities, not this line.
+
+[02:35] Drew Scheiderer: [Verdict] So, my verdict is rejected. The bridge uses the filing: 62,556 of cash and marketable securities.
+
+[02:44] Drew Scheiderer: [Why the evidence was sufficient] The evidence was enough because no case I can support reaches the price, while the relative value hasn't gone away. If EBITDA falls or gross margin breaks my 67% floor, my rule says do not initiate. That's what would change my call.
 
 END OF CORRECTED TRANSCRIPT
