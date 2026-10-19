@@ -1,18 +1,42 @@
 PROJECT: FIN 43900 Project 1 -- NVIDIA (NVDA) Corporate Finance Application
 STUDENT: Drew Scheiderer
 VIDEO: 3 Committee Presentation
-STABLE VIDEO ID/URL: [YouTube Unlisted URL]
-TITLE: [descriptive title]
-DURATION: [mm:ss] (5:00 max)
-REPOSITORY COMMIT/FROZEN VERSION: [commit hash]
+STABLE VIDEO ID/URL: https://youtu.be/7VqN5HWxUIw (YouTube ID 7VqN5HWxUIw, Unlisted)
+TITLE: FIN 43900 Project 1 – Video 3: Committee Presentation, NVIDIA Initiate/Watch/Defer – Drew Scheiderer
+DURATION: 4:31 as reported by YouTube
+REPOSITORY COMMIT/FROZEN VERSION: c6b5e4a (app version shown in the live demo)
 
-# Required evidence moments -- replace each bracket with the corrected caption text
-# and its real timestamp. Delete these two comment lines before submitting.
-[00:00] Drew Scheiderer: [LIVE DEMO opens: streamlit run app.py; committee view]
-[mm:ss] Drew Scheiderer: [move one bounded driver; explain change vs restored base]
-[mm:ss] Drew Scheiderer: [inject a fault -- checks go red, model refuses; reset to base recovers $78.83]
-[mm:ss] Drew Scheiderer: [defend WATCH/DEFER with the tool on screen: range, comps, reverse DCF]
-[mm:ss] Drew Scheiderer: [risks and reversal triggers]
-[mm:ss] Drew Scheiderer: [COMMITTEE ASK]
+Corrected from YouTube automatic captions: names, tickers, finance terms and numbers corrected;
+harmless repeats and filler left as spoken. Bracketed text is a clarification, not speech.
+
+[00:00] Drew Scheiderer: I'm Drew Scheiderer. This is coursework for FIN 43900: education, not investment advice. I use AI tools, Claude Code and ChatGPT, and every use is disclosed in my AI-use record.
+
+[00:10] Drew Scheiderer: [Decision first] Committee, my recommendation on NVIDIA is watch/defer, at a DCF range of $49 to $115 per share against a $221 price. I'll show you the model live.
+
+[00:24] Drew Scheiderer: [Live demo begins: app base state] Base case is $78.83 per share, with every check green, and the action is watch/defer.
+
+[00:33] Drew Scheiderer: [Move one bounded driver: gross margin shift to -3.0] Now I'll go ahead and shift my gross margin by 3% [3 percentage points] every year. That's the risk of custom silicon taking share. Value falls $4.10 to $74.73, which is 5.2% below base, and the action flips to do not initiate because the margin path now breaks my 67% floor.
+
+[00:55] Drew Scheiderer: [Sensitivity explained through the statements] Here's why value moves. Three points of margin come straight out of gross profit. That lowers operating income, then after-tax cash flow every year. The terminal value capitalizes the final year and is 57% of value, so most of the value drop comes through there.
+
+[01:12] Drew Scheiderer: [Restored base] Now I'll go ahead and reset to base. We're right back to $78.83.
+
+[01:17] Drew Scheiderer: [Check failing loudly on an incoherent input: drop_sbc_equity_credit] Now, to show you the model protecting you, I'll inject a real accounting error: stock compensation that's never credited to equity. The balance check fails in red, and the model refuses to give a value.
+
+[01:29] Drew Scheiderer: [Recovery] We'll go ahead and reset to base again. Right back at $78.83.
+
+[01:39] Drew Scheiderer: [Defense: range and evidence] So why watch, and not buy? My base case anchors fiscal 2027 on first-half revenue, which was up 96%, then fades growth to 7%. Even my high case, with demand broadening, margins holding at 74%, and a lower Blume-adjusted beta, only reaches $115. Nothing I can support from NVIDIA's filings gets to $221.
+
+[02:07] Drew Scheiderer: [Material assumption: discount rate, beta slider 2.2 to 1.8] So where's the disagreement? Watch the discount rate. Moving beta from 2.2 to 1.8 adds $14.68, 18.6%. The reverse DCF says the price needs a beta of about 0.5. The market and I don't disagree about operations. We disagree about risk.
+
+[02:35] Drew Scheiderer: [Comparables: why not walk away] So why not walk away? That's relative value. NVIDIA trades at 40 times trailing EV-to-EBITDA, cheaper than Broadcom at 51 and AMD at 138, with the highest EBITDA margin of the three. I don't average a $79 DCF with a $278 peer multiple. The DCF sets my range, and the comps only decide whether the name stays on watch.
+
+[03:02] Drew Scheiderer: [Conditions that flip the call] Now, what moves my call? Three cases flip it to do not initiate: if hyperscalers pause and fiscal 2028 revenue goes flat; if AI capex digests and revenue falls; if gross margin breaks 67%. In each, the earnings behind that cheap multiple stop holding up.
+
+[03:25] Drew Scheiderer: [Risks and limitations] Now, there's three limits you should weigh. Beta carries the answer. I have only two peers. And my forecast is dated from the January balance sheet. Rolling it forward to today adds about 11%, which is nowhere near enough to close the gap.
+
+[03:42] Drew Scheiderer: [Reversal triggers] My triggers: initiate if the price falls to my base value, around $79. Do not initiate if a 10-Q shows year-over-year revenue decline, gross margin below 67%, or NVIDIA's multiple reaching its cheapest peer's. Escalate if purchase obligations climb above 12.8% of inventory.
+
+[04:10] Drew Scheiderer: [Committee ask] Now for my ask: approve watch/defer with these triggers, and re-review when the Q3 fiscal 2027 10-Q is filed. My next research is the discount rate: a two-year beta re-estimate and a forward-looking equity risk premium. Thank you.
 
 END OF CORRECTED TRANSCRIPT
