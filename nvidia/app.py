@@ -21,6 +21,12 @@ import analysis
 HERE = pathlib.Path(__file__).resolve().parent
 FROZEN = HERE / "visible_output.json"
 
+
+def _md(text):
+    """Escape $ so Streamlit shows dollar amounts as text, not as LaTeX math."""
+    return text.replace("$", r"\$")
+
+
 st.set_page_config(page_title="NVDA Project 1 -- Committee", layout="wide")
 st.title("NVIDIA (NVDA) -- initiate, watch/defer, or do not initiate?")
 st.caption("FIN 43900 Project 1 · Drew Scheiderer · coursework, not investment advice. "
@@ -40,10 +46,10 @@ st.header("Committee view (frozen)")
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Action", rec["action"])
 c2.metric("DCF range (low-base-high)",
-          " / ".join(f"${v:,.0f}" for v in val["dcf_low_base_high_per_share"]))
-c3.metric("Price", f"${frozen['material_inputs']['price']:,.2f}", help=f"close {frozen['as_of']}")
+          _md(" / ".join(f"${v:,.0f}" for v in val["dcf_low_base_high_per_share"])))
+c3.metric("Price", _md(f"${frozen['material_inputs']['price']:,.2f}"), help=f"close {frozen['as_of']}")
 c4.metric("Terminal value share of EV", f"{val['terminal_share_of_ev']:.1%}")
-st.write(f"**Why:** {rec['reason']}")
+st.write(_md(f"**Why:** {rec['reason']}"))
 st.write(f"**Reversal trigger:** {frozen['reversal_trigger']}")
 with st.expander("Conditions, cases, comparables, reverse DCF, limitations"):
     st.write("**Conditions**")
@@ -137,11 +143,11 @@ if run["valid"]:
                                      analysis.ebitda_persists(run),
                                      analysis.margin_holds(inputs))
     m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Value per share", f"${value:,.2f}", f"{value - base_value:+,.2f} vs base")
+    m1.metric("Value per share", _md(f"${value:,.2f}"), f"{value - base_value:+,.2f} vs base")
     m2.metric("Change vs base", f"{value / base_value - 1:+.1%}")
     m3.metric("WACC", f"{run['wacc']:.2%}")
     m4.metric("Action under these inputs", action)
-    st.caption(reason)
+    st.caption(_md(reason))
 else:
     st.error("MODEL REFUSED TO VALUE -- at least one check failed. No number is shown for a "
              "broken model.")

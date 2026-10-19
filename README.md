@@ -41,6 +41,14 @@ Readable without running anything:
   renders: material inputs, as-of date, range, action, conditions, reversal trigger, units,
   limitations.
 - [`docs/decision-memo.md`](docs/decision-memo.md) — the two-page committee memo.
+- **Application capture** — the semi-adjustable app (`streamlit run app.py`), captured 2026-10-19:
+  - [`docs/app-screenshots/app-1-base.png`](docs/app-screenshots/app-1-base.png) — base case:
+    committee view, cases, what-ifs, comparables and every check passing.
+  - [`docs/app-screenshots/app-2-margin-minus-3pp.png`](docs/app-screenshots/app-2-margin-minus-3pp.png)
+    — gross margin −3pp: $74.73 (−5.2%), action flips to DO NOT INITIATE (67% floor).
+  - [`docs/app-screenshots/app-3-fault-refused.png`](docs/app-screenshots/app-3-fault-refused.png)
+    — injected fault (stock compensation not credited to equity): the balance check fails red
+    and the model refuses to value.
 
 ## Setup and run
 
