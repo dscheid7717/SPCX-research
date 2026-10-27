@@ -1,0 +1,46 @@
+Reserve minimum: 3.0% of the portfolio (4 quarters x $0.75M / $100M)
+
+Candidate A
+  Weights sum to 100                          100.0  pass
+  Long-only (lowest weight not negative)        0.0  pass
+  Reserve-eligible >= 3.0%                     14.0  pass
+  Redeemable in 5 days >= 90%                 100.0  pass
+  Largest single company <= 8%                  0.0  pass
+  Calendar-year loss <= 10% (S9)             requires CIO clarification
+  Verdict: passes every checkable rule
+
+Candidate B
+  Weights sum to 100                          100.0  pass
+  Long-only (lowest weight not negative)        0.0  pass
+  Reserve-eligible >= 3.0%                      1.0  FAIL
+  Redeemable in 5 days >= 90%                  85.0  FAIL
+  Largest single company <= 8%                  9.0  FAIL
+  Calendar-year loss <= 10% (S9)             requires CIO clarification
+  Verdict: fails 3 rule(s)
+
+Candidate C
+  Weights sum to 100                          100.0  pass
+  Long-only (lowest weight not negative)        0.0  pass
+  Reserve-eligible >= 3.0%                      2.0  FAIL
+  Redeemable in 5 days >= 90%                 100.0  pass
+  Largest single company <= 8%                  8.0  pass
+  Calendar-year loss <= 10% (S9)             requires CIO clarification
+  Verdict: fails 1 rule(s)
+
+Candidate D
+  Weights sum to 100                          100.0  pass
+  Long-only (lowest weight not negative)        0.0  pass
+  Reserve-eligible >= 3.0%                      3.0  pass
+  Redeemable in 5 days >= 90%                 100.0  pass
+  Largest single company <= 8%                  0.0  pass
+  Calendar-year loss <= 10% (S9)             requires CIO clarification
+  Verdict: passes every checkable rule
+
+Candidate E
+  Weights sum to 100                          100.0  pass
+  Long-only (lowest weight not negative)        0.0  pass
+  Reserve-eligible >= 3.0%                      0.0  FAIL
+  Redeemable in 5 days >= 90%                 100.0  pass
+  Largest single company <= 8%                  0.0  pass
+  Calendar-year loss <= 10% (S9)             requires CIO clarification
+  Verdict: fails 1 rule(s)

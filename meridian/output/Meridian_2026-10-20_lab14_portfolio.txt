@@ -1,0 +1,8 @@
+Objective: CPI 2.5% (estimate) + 4.0% = 6.5% a year
+Weights order: bills / 10-year / IG bonds / equity
+
+Portfolio           Weights (%)                   Return     Vol  Reserve  Meets 6.5%?
+--------------------------------------------------------------------------------------
+Benchmark           0.0 / 0.0 / 40.0 / 60.0         6.80   10.46      0.0  yes
+Equal weight        25.0 / 25.0 / 25.0 / 25.0       5.20    5.21     50.0  no
+Inverse volatility  84.3 / 6.0 / 7.0 / 2.6          3.77    1.05     90.3  no
